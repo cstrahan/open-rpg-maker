@@ -1,0 +1,2 @@
+class RGSSError < StandardError
+end
