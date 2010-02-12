@@ -1,3 +1,5 @@
+require 'Color.rb'
+
 # TODO: Need to support an array of font names
 #       ... should Font#name return the first available font,
 #       or should it return the array?
@@ -8,13 +10,12 @@ class Font
   attr_accessor :italic
   attr_accessor :color
   
-  def initialize(name, size)
+  def initialize(name=nil, size=nil)
     @name = name || Font.default_name
     @size = size || Font.default_size
-    @bold = Font.default_name
-    @italic = Font.default_size
-    @color = Font.default_name
-    @size = Font.default_size
+    @bold = Font.default_bold
+    @italic = Font.default_italic
+    @color = Font.default_color
   end
   
   def self.exist?(name)
