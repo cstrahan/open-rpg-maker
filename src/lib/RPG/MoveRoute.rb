@@ -1,3 +1,5 @@
+require 'MoveCommand'
+
 module RPG
   class MoveRoute
     def initialize

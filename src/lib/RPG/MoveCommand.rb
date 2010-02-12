@@ -1,10 +1,11 @@
 module RPG
-  class MoveCommand(code = 0, parameters = [])
-    def initialize
+  class MoveCommand
+    attr_accessor :code
+    attr_accessor :parameters
+
+    def initialize(code = 0, parameters = [])
       @code = code
       @parameters = parameters
     end
-    attr_accessor :code
-    attr_accessor :parameters
   end
 end
