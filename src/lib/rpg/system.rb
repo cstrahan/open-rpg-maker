@@ -1,3 +1,5 @@
+require 'audio_file'
+
 module RPG
   class System
     def initialize

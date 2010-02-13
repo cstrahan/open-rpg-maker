@@ -1,3 +1,5 @@
+require 'bitmap'
+
 module RPG
   class Sprite < ::Sprite
     @@_animations = []

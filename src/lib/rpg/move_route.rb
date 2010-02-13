@@ -1,4 +1,4 @@
-require 'MoveCommand'
+require 'move_command'
 
 module RPG
   class MoveRoute

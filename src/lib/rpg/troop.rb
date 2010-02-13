@@ -1,3 +1,5 @@
+require 'event_command'
+
 module RPG
   class Troop
     def initialize

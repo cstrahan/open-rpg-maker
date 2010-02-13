@@ -1,3 +1,5 @@
+require 'event_command'
+
 module RPG
   class CommonEvent
     def initialize

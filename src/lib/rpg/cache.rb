@@ -1,3 +1,5 @@
+require 'bitmap'
+
 module RPG
   module Cache
     @cache = {}

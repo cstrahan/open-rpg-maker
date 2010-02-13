@@ -1,3 +1,5 @@
+require 'table'
+
 module RPG
   class Enemy
     def initialize

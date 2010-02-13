@@ -25,6 +25,7 @@ There's a *lot* to do right now:
  4. Document the *RPG* module.
  5. Create the bootstrapper for WPF, Silverlight, and WinForms.
  6. Create unit tests.
+ 7. Figure out what this is (from troop.rb): RPG::BattleEventPage.new
 
 
   [1]: http://tkool.jp/products/rpgxp/eng

@@ -1,3 +1,5 @@
+require 'table'
+
 module RPG
   class Class
     def initialize

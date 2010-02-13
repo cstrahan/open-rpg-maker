@@ -1,4 +1,4 @@
-require ''
+require 'move_route'
 
 module RPG
   class Event

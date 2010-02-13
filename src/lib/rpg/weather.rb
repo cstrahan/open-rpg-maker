@@ -1,3 +1,7 @@
+require 'bitmap'
+require 'color'
+require 'sprite'
+
 module RPG
   class Weather
     def initialize(viewport = nil)
