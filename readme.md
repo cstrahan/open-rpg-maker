@@ -5,8 +5,7 @@ Open RPG Maker
 About
 -----
 
-**Open RPG Maker** is an IronRuby port of [RPG Maker XP][1]. The goal is to create a cross platform host for running RMXP games. By abstracting the executing environment from the implementation, support is planned for WPF, Silverlight and WinForms.
-
+**Open RPG Maker** is an IronRuby port of [RPG Maker XP][1]. The goal is to make existing RMXP games cross platform, including support for linux, OSX and Windows.
 
 Status
 ------
