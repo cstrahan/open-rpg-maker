@@ -1,23 +1,20 @@
 class Color
-  attr_reader :red
-  attr_reader :green
-  attr_reader :blue
-  attr_reader :alpha
+  attr_reader :red, :green ,:blue ,:alpha
   
   def red=(num)
-    @red = check num
+    @red = constrain num, 0..255
   end
   
   def green=(num)
-    @green = check num
+    @green = constrain num, 0..255
   end
   
   def blue=(num)
-    @blue = check num
+    @blue = constrain num, 0..255
   end
   
   def alpha=(num)
-    @alpha = check num
+    @alpha = constrain num, 0..255
   end
   
   def initialize(red, green, blue, alpha=255)
@@ -34,8 +31,14 @@ class Color
   
 private
 
-  def check(num)
-    num < 0 ? 0 : num > 255 ? 255 : num
+  def constrain(val, range)
+    if val >= range.min && val <= range.max
+      val
+    elsif val < range.min
+      range.min
+    elsif val > range.max
+      range.max 
+    end
   end
 
 end

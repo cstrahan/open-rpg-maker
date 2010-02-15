@@ -3,7 +3,7 @@ require 'rake/testtask'
 
 test_pattern = 'test/*_test.rb'
 
-desc "Run tests"
+desc "Run tests."
 Rake::TestTask.new("test") do |t|
   t.libs << 'lib'
   t.pattern = test_pattern

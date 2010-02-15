@@ -4,6 +4,8 @@ require 'sprite'
 
 module RPG
   class Weather
+    attr_reader :type, :max, :ox, :oy
+
     def initialize(viewport = nil)
       @type = 0
       @max = 0
@@ -119,9 +121,5 @@ module RPG
         end
       end
     end
-    attr_reader :type
-    attr_reader :max
-    attr_reader :ox
-    attr_reader :oy
   end
 end

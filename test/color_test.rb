@@ -28,7 +28,7 @@ class ColorTest < Test::Unit::TestCase
       assert color.alpha == 255
     end
     
-    should "should be settable via Color#set" do
+    should "be settable via Color#set" do
       color = Color.new(10,20,30,40)
       color.set 40, 30, 20, 10
       
@@ -38,7 +38,7 @@ class ColorTest < Test::Unit::TestCase
       assert color.alpha == 10
     end
     
-    should "should be settable via attributes" do
+    should "be settable via attributes" do
       color = Color.new(0,0,0,0)
       
       color.red   = 40

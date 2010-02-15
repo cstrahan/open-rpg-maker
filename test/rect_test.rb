@@ -14,7 +14,7 @@ class RectTest < Test::Unit::TestCase
       assert rect.height == 40
     end
     
-    should "should be settable via Rect#set" do
+    should "be settable via Rect#set" do
       rect = Rect.new(10,20,30,40)
       rect.set 40, 30, 20, 10
       
@@ -24,7 +24,7 @@ class RectTest < Test::Unit::TestCase
       assert rect.height == 10
     end
     
-    should "should be settable via attributes" do
+    should "be settable via attributes" do
       rect = Rect.new(0,0,0,0)
       
       rect.x      = 40

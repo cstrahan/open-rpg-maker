@@ -1,23 +1,20 @@
 class Tone
-  attr_reader :red
-  attr_reader :green
-  attr_reader :blue
-  attr_reader :gray
+  attr_reader :red, :green, :blue, :gray
   
   def red=(num)
-    @red = num < -255 ? -255 : num > 255 ? 255 : num
+    @red = constrain num, -255..255
   end
 
   def green=(num)
-    @green =  num < -255 ? -255 : num > 255 ? 255 : num
+    @green = constrain num, -255..255
   end
   
   def blue=(num)
-    @blue =  num < -255 ? -255 : num > 255 ? 255 : num
+    @blue = constrain num, -255..255
   end
   
   def gray=(num)
-    @gray =  num < 0 ? 0 : num > 255 ? 255 : num
+    @gray = constrain num, 0..255
   end
   
   def initialize(red, green, blue, gray=0)
@@ -25,9 +22,22 @@ class Tone
   end
   
   def set(red, green, blue, gray=0)
-    self.red = red
+    self.red   = red
     self.green = green
-    self.blue = blue
-    self.gray = gray
+    self.blue  = blue
+    self.gray  = gray
   end
+  
+private
+
+  def constrain(val, range)
+    if val < range.min
+      range.min
+    elsif val > range.max
+      range.max
+    else
+      val
+    end
+  end
+  
 end

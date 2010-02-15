@@ -28,7 +28,7 @@ class ToneTest < Test::Unit::TestCase
       assert tone.gray  ==  255
     end
     
-    should "should be settable via Tone#set" do
+    should "be settable via Tone#set" do
       tone = Tone.new(10,20,30,40)
       tone.set 40, 30, 20, 10
       
@@ -38,7 +38,7 @@ class ToneTest < Test::Unit::TestCase
       assert tone.gray  == 10
     end
     
-    should "should be settable via attributes" do
+    should "be settable via attributes" do
       tone = Tone.new(0,0,0,0)
       
       tone.red   = 40

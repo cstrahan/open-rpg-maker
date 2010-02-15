@@ -2,6 +2,8 @@ require 'move_route'
 
 module RPG
   class Event
+    attr_accessor :id, :name, :x, :y, :pages
+
     def initialize(x, y)
       @id = 0
       @name = ""
@@ -9,12 +11,7 @@ module RPG
       @y = y
       @pages = [RPG::Event::Page.new]
     end
-    attr_accessor :id
-    attr_accessor :name
-    attr_accessor :x
-    attr_accessor :y
-    attr_accessor :pages
-    
+
     class Page
       def initialize
         @condition = RPG::Event::Page::Condition.new
