@@ -7,6 +7,11 @@ About
 
 **Open RPG Maker** is a clone of [RPG Maker XP][1]. The goal is to create a cross platform re-implementation of the RMXP library, written in 100% Ruby. All GUI related code is modular so as to support platform-specific forks.
 
+**Additional Links:**
+
+ - [Documentation][2] (via [yardoc][3])
+ - [Code metrics][4] (via [Caliper][5])
+
 Supported Platforms
 -------------------
 
@@ -35,3 +40,7 @@ There's still a *lot* to do right now:
 
 
   [1]: http://tkool.jp/products/rpgxp/eng
+  [2]: http://yardoc.org/docs/cstrahan-open-rpg-maker
+  [3]: http://yardoc.org/
+  [4]: http://getcaliper.com/caliper/project?repo=git%3A%2F%2Fgithub.com%2Fcstrahan%2Fopen-rpg-maker.git
+  [5]: http://getcaliper.com/

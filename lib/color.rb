@@ -21,7 +21,6 @@ class Color
     set red, green, blue, alpha
   end
   
-  # Not sure if alpha should have a default here...
   def set(red, green, blue, alpha=255)
     self.red   = red
     self.green = green
