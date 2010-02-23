@@ -5,18 +5,25 @@ Open RPG Maker
 About
 -----
 
-**Open RPG Maker** is an IronRuby port of [RPG Maker XP][1]. The goal is to make existing RMXP games cross platform, including support for linux, OSX and Windows.
+**Open RPG Maker** is a clone of [RPG Maker XP][1]. The goal is to create a cross platform re-implementation of the RMXP library, written in 100% Ruby. All GUI related code is modular so as to support platform-specific forks.
+
+Supported Platforms
+-------------------
+
+Linux, OSX and Windows are all supported. These are the following primary GUI platforms we are targeting:
+
+ - FXRuby
+ - Silverlight/IronRuby
 
 Status
 ------
 
-**Open RPG Maker** is currently a work in progress.
-
+A majority of the core library is implemented, leaving the intricacies of the GUI code for last. As they say, the last 10% of functionality represents 90% of the development time.
 
 Roadmap
 -------
 
-There's a *lot* to do right now:
+There's still a *lot* to do right now:
 
  1. Recreate the resource files (*.rxdata) in an unencrypted format.
  2. Finish the *RPG* module, and create the *load_data(filename)* and *save_data(obj, filename)* bult-ins.

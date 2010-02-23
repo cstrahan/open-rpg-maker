@@ -1,0 +1,5 @@
+*.swp
+doc
+coverage
+.idea
+.yardoc
