@@ -1,6 +1,7 @@
 # The bitmap class. Bitmaps are expressions of so-called graphics.
 # Sprites ({Sprite}) and other objects must be used to display bitmaps on the screen.
 class Bitmap
+
   # Gets the font used to draw a string with the {Bitmap#draw_text} method.
   # @return [Font] the font used to draw a string with the {Bitmap#draw_text} method.
   attr_accessor :font
@@ -15,11 +16,14 @@ class Bitmap
   # @return [Rect] the bitmap rectangle.
   attr_reader :rect
 
+  # A new instance of {Bitmap}. 
   # @overload initialize(filename) 
   #   Loads the graphic file specified in filename and creates a bitmap object.
   #   Also automatically searches files included in RGSS-RTP and encrypted archives. File extensions may be omitted.
+  #   @return [Bitmap] a bitmap of the graphic file specified in filename.
   # @overload initialize(width, height) 
   #   Creates a bitmap object with the specified size.
+  #   @return [Bitmap] a bitmap oject with the specified size.
   def intialize(*args)
     if args.size == 1
       load_file args[0]
@@ -93,8 +97,11 @@ class Bitmap
   end
 
   # Draws a string str in the bitmap box (x, y, width, height) or rect (Rect).  
+  #
   # If the text length exceeds the box's width, the text width will automatically be reduced by up to 60 percent.  
+  #
   # Horizontal text is left-aligned by default; set align to 1 to center the text and to 2 to right-align it. Vertical text is always centered.  
+  #
   # As this process is time-consuming, redrawing the text with every frame is not recommended.
   # 
   # @overload draw_text(x, y, width, height, str[, align])
