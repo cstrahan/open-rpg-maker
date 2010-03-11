@@ -1,30 +1,30 @@
-require 'audio_file'
-
 module RPG
-  class Map
-    def initialize(width, height)
-      @tileset_id = 1
-      @width = width
-      @height = height
-      @autoplay_bgm = false
-      @bgm = RPG::AudioFile.new
-      @autoplay_bgs = false
-      @bgs = RPG::AudioFile.new("", 80)
-      @encounter_list = []
-      @encounter_step = 30
-      @data = Table.new(width, height, 3)
-      @events = {}
+  class MapInfo
+    def initialize
+      @name = ""
+      @parent_id = 0
+      @order = 0
+      @expanded = false
+      @scroll_x = 0
+      @scroll_y = 0
     end
-    attr_accessor :tileset_id
-    attr_accessor :width
-    attr_accessor :height
-    attr_accessor :autoplay_bgm
-    attr_accessor :bgm
-    attr_accessor :autoplay_bgs
-    attr_accessor :bgs
-    attr_accessor :encounter_list
-    attr_accessor :encounter_step
-    attr_accessor :data
-    attr_accessor :events
+    
+    # The map name.
+    attr_accessor :name
+    
+    # The parent map ID.
+    attr_accessor :parent_id
+    
+    # The map tree display order, used internally.
+    attr_accessor :order
+    
+    # The map tree expansion flag, used internally.
+    attr_accessor :expanded
+    
+    # The X-axis scroll position, used internally.
+    attr_accessor :scroll_x
+    
+    # The Y-axis scroll position, used internally.
+    attr_accessor :scroll_y
   end
 end

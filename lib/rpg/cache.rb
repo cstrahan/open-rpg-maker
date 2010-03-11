@@ -1,13 +1,25 @@
 require 'bitmap'
 
 module RPG
-  # A module that loads each of RPGXP's graphic formats, creates a Bitmap object, and retains it.
+  # A module that loads each of RPGXP's graphic formats, 
+  # creates a {Bitmap} object, and retains it.
   # 
-  # To speed up load times and conserve memory, this module holds the created Bitmap object in an internal hash, allowing the program to return preexisting objects when the same bitmap is requested again.
+  # To speed up load times and conserve memory,
+  # this module holds the created Bitmap object in an internal hash,
+  # allowing the program to return preexisting objects when
+  # the same bitmap is requested again.
   # 
-  # This feature means you must take care not to use {Bitmap#dispose} to free the bitmaps specified in the origins of other sprites. If those objects have already been freed when a bitmap is requested, the objects will automatically be recreated, so it is safe to free the object if you are certain it is not referenced elsewhere. Bitmaps consume a large amount of memory, so make it a practice to free bitmaps you use only rarely.
+  # This feature means you must take care not to use {Bitmap#dispose} to
+  # free the bitmaps specified in the origins of other sprites.
+  # If those objects have already been freed when a bitmap is requested,
+  # the objects will automatically be recreated, so it is safe to free
+  # the object if you are certain it is not referenced elsewhere.
+  # Bitmaps consume a large amount of memory, so make it a practice to
+  # free bitmaps you use only rarely.
   # 
-  # If the specified file name is an empty string, the module will create and return a 32 x 32 pixel bitmap. This ensures compatibility with RPGXP's "(None)" designation.
+  # If the specified file name is an empty string, the module will create and
+  # return a 32 x 32 pixel bitmap. This ensures compatibility with RPGXP's 
+  # "(None)" designation.
   module Cache
     @cache = {}
     def self.load_bitmap(folder_name, filename, hue = 0)
@@ -109,9 +121,12 @@ module RPG
       self.load_bitmap("Graphics/Windowskins/", filename)
     end
     
-    # Gets only a specified tile from a tileset. Use tile_id to specify the ID of the tile to retrieve and hue to adjust its hue values.
+    # Gets only a specified tile from a tileset.
+    # Use tile_id to specify the ID of the tile to retrieve and hue to adjust 
+    # its hue values.
     #
-    # Used when a tile is specified in an event graphic ({RPG::Event::Page::Graphic}).
+    # Used when a tile is specified in an event graphic 
+    # ({RPG::Event::Page::Graphic}).
     # @return [Bitmap] the specified tile.
     def self.tile(filename, tile_id, hue)
       key = [filename, tile_id, hue]

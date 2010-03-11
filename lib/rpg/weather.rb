@@ -3,8 +3,26 @@ require 'color'
 require 'sprite'
 
 module RPG
+  # Class for weather effects (rain, storm, snow)
+  # displayed via RPGXP's Event command.
   class Weather
-    attr_reader :type, :max, :ox, :oy
+    # Weather type:
+    # 0::    none
+    # 1::    rain
+    # 2::    storm
+    # 3::    snow
+    attr_reader :type
+    
+    # Amount of weather to be shown at once (0..40).
+    attr_reader :max
+    
+    # The X-coordinate of the effect's starting point.
+    # Correlates with the tilemap starting point and scrolls.
+    attr_reader :ox
+    
+    # The Y-coordinate of the effect's starting point.
+    # Correlates with the tilemap starting point and scrolls.
+    attr_reader :oy
 
     def initialize(viewport = nil)
       @type = 0
@@ -37,6 +55,8 @@ module RPG
         @sprites.push(sprite)
       end
     end
+    
+    # Frees a weather effect.
     def dispose
       for sprite in @sprites
         sprite.dispose
@@ -45,6 +65,12 @@ module RPG
       @storm_bitmap.dispose
       @snow_bitmap.dispose
     end
+    
+    # Weather type:
+    # 0::    none
+    # 1::    rain
+    # 2::    storm
+    # 3::    snow
     def type=(type)
       return if @type == type
       @type = type
@@ -66,6 +92,9 @@ module RPG
         end
       end
     end
+    
+    # The X-coordinate of the effect's starting point.
+    # Correlates with the tilemap starting point and scrolls.
     def ox=(ox)
       return if @ox == ox;
       @ox = ox
@@ -73,6 +102,9 @@ module RPG
         sprite.ox = @ox
       end
     end
+    
+    # The Y-coordinate of the effect's starting point.
+    # Correlates with the tilemap starting point and scrolls.
     def oy=(oy)
       return if @oy == oy;
       @oy = oy
@@ -80,6 +112,8 @@ module RPG
         sprite.oy = @oy
       end
     end
+    
+    # Amount of weather to be shown at once (0..40).
     def max=(max)
       return if @max == max;
       @max = [[max, 0].max, 40].min
@@ -90,6 +124,9 @@ module RPG
         end
       end
     end
+    
+    # Advances the weather effect.
+    # As a rule, this method is called once per frame.
     def update
       return if @type == 0
       for i in 1..@max
