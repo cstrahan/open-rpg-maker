@@ -16,7 +16,7 @@ module RPG
     attr_accessor :skippable
     
     # Program contents. An {RPG::MoveCommand} array.
-    # @returns[Array<RPG::MoveCommand>]
+    # @return [Array<RPG::MoveCommand>]
     attr_accessor :list
   end
 end

@@ -99,7 +99,7 @@ module RPG
     attr_accessor :state_ranks
     
     # The enemy's actions. An {RPG::Enemy::Action} array.
-    # @returns [Array<RPG::Enemy::Action>]
+    # @return [Array<RPG::Enemy::Action>]
     attr_accessor :actions
     
     # The enemy's experience.

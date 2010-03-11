@@ -36,11 +36,11 @@ module RPG
     attr_accessor :frame_max
     
     # Frame contents. An RPG::Animation::Frame array.
-    # @returns [Array<RPG::Animation::Frame>]
+    # @return [Array<RPG::Animation::Frame>]
     attr_accessor :frames
     
     # Timing for SE and flash effects. An {RPG::Animation::Timing} array.
-    # @returns [Array<RPG::Animation::Timing>]
+    # @return [Array<RPG::Animation::Timing>]
     attr_accessor :timings
     
     # Data class for animation frames.

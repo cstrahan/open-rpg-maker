@@ -124,7 +124,7 @@ module RPG
     attr_accessor :words
     
     # Party settings for battle tests. An {RPG::System::TestBattler} array.
-    # @returns [Array<RPG::System::TestBattler>]
+    # @return [Array<RPG::System::TestBattler>]
     attr_accessor :test_battlers
     
     # The troop ID for battle tests.

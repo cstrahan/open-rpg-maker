@@ -15,7 +15,7 @@ module RPG
     attr_accessor :y
     
     # The Events pages. An {RPG::Event::Page} array.
-    # @returns [Array<RPG::Event::Page>]
+    # @return [Array<RPG::Event::Page>]
     attr_accessor :pages
 
     def initialize(x, y)
@@ -45,11 +45,11 @@ module RPG
       end
       
       # The event condition {RPG::Event::Page::Condition}.
-      # @returns [RPG::Event::Page::Condition]
+      # @return [RPG::Event::Page::Condition]
       attr_accessor :condition
       
       # The event graphic {RPG::Event::Page::Graphic}.
-      # @returns [RPG::Event::Page::Graphic]
+      # @return [RPG::Event::Page::Graphic]
       attr_accessor :graphic
       
       # Type of movement: 
@@ -105,7 +105,7 @@ module RPG
       attr_accessor :trigger
       
       # Program contents. An {RPG::EventCommand} array.
-      # @returns [Array<RPG::EventCommand>]
+      # @return [Array<RPG::EventCommand>]
       attr_accessor :list
       
       class Condition

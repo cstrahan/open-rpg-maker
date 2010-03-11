@@ -27,7 +27,7 @@ module RPG
     attr_accessor :switch_id
     
     # List of event commands. An {RPG::EventCommand} array.
-    # @returns Array<RPG::EventCommand>
+    # @return [Array<RPG::EventCommand>]
     attr_accessor :list
   end
 end

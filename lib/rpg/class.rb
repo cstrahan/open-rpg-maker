@@ -42,7 +42,7 @@ module RPG
     attr_accessor :state_ranks
     
     # Skills to Learn. An {RPG::Class::Learning} array.
-    # @returns Array<RPG::Class::Learning>
+    # @return [Array<RPG::Class::Learning>]
     attr_accessor :learnings
 
     def initialize

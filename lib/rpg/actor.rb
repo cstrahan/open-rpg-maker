@@ -79,7 +79,7 @@ module RPG
     # 3::   dexterity
     # 4::   agility
     # 5::   intelligence).
-    # @returns [Table]
+    # @return [Table]
     attr_accessor :parameters
     
     # ID of the actor's initially equipped weapon.

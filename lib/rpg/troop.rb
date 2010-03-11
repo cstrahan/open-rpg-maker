@@ -6,7 +6,7 @@ module RPG
       @id = 0
       @name = ""
       @members = []
-      @pages = [RPG::BattleEventPage.new]
+      @pages = [RPG::BattleEventPage.new] # Shouldn't this be [RPG::Troop::Member.new] ?
     end
     
     # Troop ID.

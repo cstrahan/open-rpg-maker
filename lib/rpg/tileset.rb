@@ -76,19 +76,19 @@ module RPG
     # 0x08::    Cannot move up. 
     # 0x40::    Bush flag. 
     # 0x80::    Counter flag. 
-    # @returns [Table]
+    # @return [Table]
     attr_accessor :passages
     
     # Priority table. A 1-dimensional {Table} containing priority data.
     #
     # The tile ID is used as a subscript.
-    # @returns [Table]
+    # @return [Table]
     attr_accessor :priorities
     
     # Terrain tag table A 1-dimensional {Table} containing terrain tag data.
     #
     # The tile ID is used as a subscript.
-    # @returns [Table]
+    # @return [Table]
     attr_accessor :terrain_tags
   end
 end
