@@ -17,7 +17,7 @@ Supported Platforms
 
 Linux, OSX and Windows are all supported. These are the following primary GUI platforms we are targeting:
 
- - FXRuby
+ - [Rubygame][6]
  - Silverlight/IronRuby
 
 Status
@@ -44,4 +44,4 @@ There's still a *lot* to do right now:
   [3]: http://yardoc.org/
   [4]: http://getcaliper.com/caliper/project?repo=git%3A%2F%2Fgithub.com%2Fcstrahan%2Fopen-rpg-maker.git
   [5]: http://getcaliper.com/
-
+  [6]: http://rubygame.org/
