@@ -1,4 +1,4 @@
-require 'event_command'
+require 'rpg/event_command'
 
 # Data class for common events.
 module RPG

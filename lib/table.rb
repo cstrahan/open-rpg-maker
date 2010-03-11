@@ -28,9 +28,9 @@ class Table
     raise unless params_valid?(x, y, z)
     raise "wrong # of indecies" if dimensions(x, y, z) != @dimensions
     
-    return nil unless (0..@xsize).include? (x or 0) and
-                      (0..@ysize).include? (y or 0) and
-                      (0..@zsize).include? (z or 0)
+    return nil unless (0..@xsize).include?(x || 0) and
+                      (0..@ysize).include?(y || 0) and
+                      (0..@zsize).include?(z || 0)
     
     case @dimensions
     when 1

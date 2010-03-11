@@ -1,4 +1,4 @@
-require 'move_route'
+require 'rpg/move_route'
 
 module RPG
   class Event
@@ -130,7 +130,7 @@ module RPG
         # Truth value for whether the [Variable] condition is valid.
         attr_accessor :variable_valid
         
-        Truth value for whether the [Self Switch] condition is valid.
+        # Truth value for whether the [Self Switch] condition is valid.
         attr_accessor :self_switch_valid
         
         # If the first [Switch] condition is valid, the ID of that switch.

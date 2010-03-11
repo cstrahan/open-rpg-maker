@@ -1,4 +1,4 @@
-require 'audio_file'
+require 'rpg/audio_file'
 
 module RPG
   class Animation

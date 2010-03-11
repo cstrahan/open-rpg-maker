@@ -1,4 +1,4 @@
-require 'move_command'
+require 'rpg/move_command'
 
 module RPG
   # Data class for the move route (movement route).
