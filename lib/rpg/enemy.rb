@@ -137,16 +137,24 @@ module RPG
       # 0::    basic
       # 1::    skill
       attr_accessor :kind
+      
+      # When set to a [Basic] action, defines it further:
+      # 0::    attack
+      # 1::    defend
+      # 2::    escape
+      # 3::    do nothing
       attr_accessor :basic
+      
+      # When set to a [Skill], the ID of that skill.
       attr_accessor :skill_id
       
-      # a and b values specified in the [Turn] condition.
+      # a value specified in the [Turn] condition.
       # To be input in the form a + bx.
       #
       # When the turn is not specified as a condition, a = 0 and b = 1.
       attr_accessor :condition_turn_a
       
-      # a and b values specified in the [Turn] condition.
+      # b value specified in the [Turn] condition.
       # To be input in the form a + bx.
       #
       # When the turn is not specified as a condition, a = 0 and b = 1.
