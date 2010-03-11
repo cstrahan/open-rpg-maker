@@ -140,6 +140,8 @@ module RPG
       end
       @cache[key]
     end
+    
+    # Empties the cache.
     def self.clear
       @cache = {}
       GC.start
