@@ -6,6 +6,7 @@ require 'color'
 class Font
   attr_accessor :name, :size, :bold, :italic, :color
   
+  # Creates a Font object.
   def initialize(name=nil, size=nil)
     @name = name || Font.default_name
     @size = size || Font.default_size
@@ -14,6 +15,7 @@ class Font
     @color = Font.default_color
   end
   
+  # Returns TRUE when the specified font exists within the system.
   def self.exist?(name)
     raise "not implemented"
   end

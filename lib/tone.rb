@@ -1,18 +1,28 @@
 class Tone
   attr_reader :red, :green, :blue, :gray
   
+  # The red balance adjustment value (-255 to 255).
+  # Values out of range are automatically corrected.
   def red=(num)
     @red = constrain num, -255..255
   end
 
+  # The red balance adjustment value (-255 to 255).
+  # Values out of range are automatically corrected.
   def green=(num)
     @green = constrain num, -255..255
   end
   
+  # The blue balance adjustment value (-255 to 255).
+  # Values out of range are automatically corrected.
   def blue=(num)
     @blue = constrain num, -255..255
   end
   
+  # The grayscale filter strength (0 to 255).
+  # Values out of range are automatically corrected.
+  #
+  # When this value is not 0, processing time is significantly longer than when using tone balance adjustment values alone.
   def gray=(num)
     @gray = constrain num, 0..255
   end
@@ -21,6 +31,7 @@ class Tone
     set red, green, blue, gray
   end
   
+  # Sets all components at once.
   def set(red, green, blue, gray=0)
     self.red   = red
     self.green = green
