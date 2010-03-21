@@ -2,7 +2,7 @@
 module Input
   # Updates input data. As a rule, this method is called once per frame.
   def self.update()
-    raise "not implemented"
+    warn 'need to implement Input.update'
   end
 
   # Determines whether the button num is currently being pressed.
@@ -14,7 +14,7 @@ module Input
   #   do_something
   # end
   def self.press?(num)
-    raise "not implemented"
+    warn 'need to implement Input.press?'
   end
 
   # Determines whether the button num is being pressed again.
@@ -24,7 +24,7 @@ module Input
   #
   # If the button is being pressed, returns TRUE. If not, returns FALSE.
   def self.trigger?(num)
-    raise "not implemented"
+    warn 'need to implement Input.trigger?'
   end
 
   # Determines whether the button num is being pressed again.
@@ -34,7 +34,7 @@ module Input
   #
   # If the button is being pressed, returns TRUE. If not, returns FALSE.
   def self.repeat?(num)
-    raise "not implemented"
+    warn 'need to implement Input.repeat?'
   end
 
   # Checks the status of the directional buttons, translates the data
@@ -43,7 +43,7 @@ module Input
   # 
   # If no directional buttons are being pressed (or the equivalent), returns 0.
   def self.dir4()
-    raise "not implemented"
+    warn 'need to implement Input.dir4'
   end
 
   # Checks the status of the directional buttons, translates the data into
@@ -52,7 +52,7 @@ module Input
   #
   # If no directional buttons are being pressed (or the equivalent), returns 0.
   def self.dir8()
-    raise "not implemented"    
+    warn 'need to implement Input.dir8'
   end
 
   DOWN  = 2

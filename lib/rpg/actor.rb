@@ -36,12 +36,14 @@ module RPG
     end
     
     # The actor ID.
+    # @return [Integer]
     attr_accessor :id
     
     # The actor name.
     attr_accessor :name
     
     # The actor class ID.
+    # @return [Integer]
     attr_accessor :class_id
     
     # The actor's initial level.

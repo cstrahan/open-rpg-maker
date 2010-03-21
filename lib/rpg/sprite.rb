@@ -1,6 +1,4 @@
-require 'bitmap'
-require File.join(File.dirname(__FILE__), "..", "sprite")
-# why doesn't this work? -> require 'sprite'
+require 'sprite'
 
 module RPG
   class Sprite < ::Sprite

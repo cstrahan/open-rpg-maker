@@ -72,14 +72,27 @@ class Window
   attr_reader :viewport
 
   def initialize(viewport = nil)
-    raise "not implemented"
-
     @viewport = viewport
+    
+    self.stretch = true
+    self.active = true
+    self.visible = true
+    self.pause = false
+    self.x = 0
+    self.y = 0
+    self.width = 0
+    self.height = 0
+    self.cursor_rect = Rect.new(0,0,0,0)
+    self.ox = 0
+    self.oy = 0
+    self.opacity = 255
+    self.back_opacity = 255
+    self.contents_opacity = 255
   end
 
   # Frees the window. If the window has already been freed, does nothing.
   def dispose
-    raise "not implemented"
+    warn 'need to implement Window.dispose'
 
     @disposed = true
   end
@@ -92,7 +105,7 @@ class Window
   # Refreshes the cursor blink and the pause graphic animation.
   # As a rule, this method is called once per frame.
   def update
-    raise "not implemented"
+    warn 'need to implement Window.update'
   end
 
 end

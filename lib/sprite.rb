@@ -71,8 +71,6 @@ class Sprite
   attr_reader :viewport
 
   def initialize(viewport = nil)
-    raise "not implemented"
-
     @viewport = viewport
   end
 

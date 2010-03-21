@@ -3,7 +3,6 @@ require 'rake'
 require 'rake/rdoctask'
 require 'rake/testtask'
 require 'yard'
-require 'spec/rake/spectask'
 
 TEST_PATTERN = 'test/**/*_test.rb'
 

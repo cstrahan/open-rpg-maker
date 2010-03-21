@@ -13,7 +13,13 @@ module Graphics
     # and the game play time (in seconds) can be calculated
     # by dividing this value by the frame_rate property value.
     attr_accessor :frame_count
+    
+    # The game window. Must provide a _#surface=(bmp)_ method.
+    attr_accessor :window
   end
+
+  self.frame_rate = 40
+  self.frame_count = 0
 
   # Refreshes the game screen and advances time by 1 frame. This method must
   # be called at set intervals.
@@ -21,14 +27,19 @@ module Graphics
   # If this method is not called in 10 seconds or more, the program will view
   # the script as having run out of control and will force a quit.
   def self.update()
-    raise "not implemented"
+    warn "need to implement Graphics.update"
+    self.frame_count += 1
+    
+    bmp = Bitmap.new("C:\\source\\open-rpg-maker\\bin\\Graphics\\Icons\\001-Weapon01")
+    #bmp.draw_text "blah"
+    self.window.surface = bmp
   end
 
   # Fixes the current screen in preparation for transitions.
   #
-  #Screen rewrites are prohibited until the transition method is called.
+  # Screen rewrites are prohibited until the transition method is called.
   def self.freeze()
-    raise "not implemented"
+    warn "need to implement Graphics.freeze"
   end
 
   # Carries out a transition from the screen fixed in Graphics.freeze to the
@@ -45,12 +56,12 @@ module Graphics
   # and ending points. The larger the value, the greater the ambiguity.
   # When omitted, this value is set to 40.
   def self.transition(duration = 8, filename = nil, vague = 40)
-    raise "not implemented"
+    warn "need to implement Graphics.transition"
   end
 
   # Resets the screen refresh timing. After a time-consuming process,
   # call this method to prevent extreme frame skips.
   def self.frame_reset()
-    raise "not implemented"
+    warn "need to implement Graphics.frame_reset"
   end
 end

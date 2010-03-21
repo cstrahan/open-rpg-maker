@@ -86,6 +86,7 @@ module RPG
     # 3::    D
     # 4::    E
     # 5::    F
+    # @return [Integer]
     attr_accessor :element_ranks
     
     # Level of status effectiveness.
@@ -96,6 +97,7 @@ module RPG
     # 3::    D
     # 4::    E
     # 5::    F
+    # @return [Integer]
     attr_accessor :state_ranks
     
     # The enemy's actions. An {RPG::Enemy::Action} array.
@@ -109,12 +111,15 @@ module RPG
     attr_accessor :gold
     
     # The ID of the item used as treasure.
+    # @return [Integer]
     attr_accessor :item_id
     
     # The ID of the weapon used as treasure.
+    # @return [Integer]
     attr_accessor :weapon_id
     
     # The ID of the armor used as treasure.
+    # @return [Integer]
     attr_accessor :armor_id
     
     # The probability of treasure being left behind.
@@ -136,6 +141,7 @@ module RPG
       # Type of action:
       # 0::    basic
       # 1::    skill
+      # @return [Integer]
       attr_accessor :kind
       
       # When set to a [Basic] action, defines it further:
@@ -143,9 +149,11 @@ module RPG
       # 1::    defend
       # 2::    escape
       # 3::    do nothing
+      # @return [Integer]
       attr_accessor :basic
       
       # When set to a [Skill], the ID of that skill.
+      # @return [Integer]
       attr_accessor :skill_id
       
       # a value specified in the [Turn] condition.
@@ -175,6 +183,7 @@ module RPG
       # When the switch ID is not specified as a condition,
       # this value is set to 0. Consequently, it is essential to check whether
       # this value is 0.
+      # @return [Integer]
       attr_accessor :condition_switch_id
       
       # The action's rating (1..10).
