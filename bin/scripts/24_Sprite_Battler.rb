@@ -1,77 +1,131 @@
 #==============================================================================
-# ** Sprite_Character
+# ** Sprite_Battler
 #------------------------------------------------------------------------------
-#  This sprite is used to display the character.It observes the Game_Character
+#  This sprite is used to display the battler.It observes the Game_Character
 #  class and automatically changes sprite conditions.
 #==============================================================================
 
-class Sprite_Character < RPG::Sprite
+class Sprite_Battler < RPG::Sprite
   #--------------------------------------------------------------------------
   # * Public Instance Variables
   #--------------------------------------------------------------------------
-  attr_accessor :character                # character
+  attr_accessor :battler                  # battler
   #--------------------------------------------------------------------------
   # * Object Initialization
-  #     viewport  : viewport
-  #     character : character (Game_Character)
+  #     viewport : viewport
+  #     battler  : battler (Game_Battler)
   #--------------------------------------------------------------------------
-  def initialize(viewport, character = nil)
+  def initialize(viewport, battler = nil)
     super(viewport)
-    @character = character
-    update
+    @battler = battler
+    @battler_visible = false
+  end
+  #--------------------------------------------------------------------------
+  # * Dispose
+  #--------------------------------------------------------------------------
+  def dispose
+    if self.bitmap != nil
+      self.bitmap.dispose
+    end
+    super
   end
   #--------------------------------------------------------------------------
   # * Frame Update
   #--------------------------------------------------------------------------
   def update
     super
-    # If tile ID, file name, or hue are different from current ones
-    if @tile_id != @character.tile_id or
-       @character_name != @character.character_name or
-       @character_hue != @character.character_hue
-      # Remember tile ID, file name, and hue
-      @tile_id = @character.tile_id
-      @character_name = @character.character_name
-      @character_hue = @character.character_hue
-      # If tile ID value is valid
-      if @tile_id >= 384
-        self.bitmap = RPG::Cache.tile($game_map.tileset_name,
-          @tile_id, @character.character_hue)
-        self.src_rect.set(0, 0, 32, 32)
-        self.ox = 16
-        self.oy = 32
-      # If tile ID value is invalid
-      else
-        self.bitmap = RPG::Cache.character(@character.character_name,
-          @character.character_hue)
-        @cw = bitmap.width / 4
-        @ch = bitmap.height / 4
-        self.ox = @cw / 2
-        self.oy = @ch
+    # If battler is nil
+    if @battler == nil
+      self.bitmap = nil
+      loop_animation(nil)
+      return
+    end
+    # If file name or hue are different than current ones
+    if @battler.battler_name != @battler_name or
+       @battler.battler_hue != @battler_hue
+      # Get and set bitmap
+      @battler_name = @battler.battler_name
+      @battler_hue = @battler.battler_hue
+      self.bitmap = RPG::Cache.battler(@battler_name, @battler_hue)
+      @width = bitmap.width
+      @height = bitmap.height
+      self.ox = @width / 2
+      self.oy = @height
+      # Change opacity level to 0 when dead or hidden
+      if @battler.dead? or @battler.hidden
+        self.opacity = 0
       end
     end
-    # Set visible situation
-    self.visible = (not @character.transparent)
-    # If graphic is character
-    if @tile_id == 0
-      # Set rectangular transfer
-      sx = @character.pattern * @cw
-      sy = (@character.direction - 2) / 2 * @ch
-      self.src_rect.set(sx, sy, @cw, @ch)
+    # If animation ID is different than current one
+    if @battler.damage == nil and
+       @battler.state_animation_id != @state_animation_id
+      @state_animation_id = @battler.state_animation_id
+      loop_animation($data_animations[@state_animation_id])
+    end
+    # If actor which should be displayed
+    if @battler.is_a?(Game_Actor) and @battler_visible
+      # Bring opacity level down a bit when not in main phase
+      if $game_temp.battle_main_phase
+        self.opacity += 3 if self.opacity < 255
+      else
+        self.opacity -= 3 if self.opacity > 207
+      end
+    end
+    # Blink
+    if @battler.blink
+      blink_on
+    else
+      blink_off
+    end
+    # If invisible
+    unless @battler_visible
+      # Appear
+      if not @battler.hidden and not @battler.dead? and
+         (@battler.damage == nil or @battler.damage_pop)
+        appear
+        @battler_visible = true
+      end
+    end
+    # If visible
+    if @battler_visible
+      # Escape
+      if @battler.hidden
+        $game_system.se_play($data_system.escape_se)
+        escape
+        @battler_visible = false
+      end
+      # White flash
+      if @battler.white_flash
+        whiten
+        @battler.white_flash = false
+      end
+      # Animation
+      if @battler.animation_id != 0
+        animation = $data_animations[@battler.animation_id]
+        animation(animation, @battler.animation_hit)
+        @battler.animation_id = 0
+      end
+      # Damage
+      if @battler.damage_pop
+        damage(@battler.damage, @battler.critical)
+        @battler.damage = nil
+        @battler.critical = false
+        @battler.damage_pop = false
+      end
+      # Collapse
+      if @battler.damage == nil and @battler.dead?
+        if @battler.is_a?(Game_Enemy)
+          $game_system.se_play($data_system.enemy_collapse_se)
+        else
+          $game_system.se_play($data_system.actor_collapse_se)
+        end
+        collapse
+        @battler_visible = false
+      end
     end
     # Set sprite coordinates
-    self.x = @character.screen_x
-    self.y = @character.screen_y
-    self.z = @character.screen_z(@ch)
-    # Set opacity level, blend method, and bush depth
-    self.opacity = @character.opacity
-    self.blend_type = @character.blend_type
-    self.bush_depth = @character.bush_depth
-    # Animation
-    if @character.animation_id != 0
-      animation = $data_animations[@character.animation_id]
-      animation(animation, true)
-      @character.animation_id = 0
-    end
+    self.x = @battler.screen_x
+    self.y = @battler.screen_y
+    self.z = @battler.screen_z
   end
 end
