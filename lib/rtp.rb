@@ -1,12 +1,41 @@
 module RTP
-  # Cache the standard RTP path
-  common_path = System::Environment.get_folder_path(System::Environment::SpecialFolder.common_program_files)
-  
-  if (!common_path.nil? && !common_path.empty?)
-    STANDARD_PATH = File.join(common_path, 'Enterbrain/RGSS/Standard/')
-  else
-    STANDARD_PATH = nil
+
+private
+
+  # Returns the first file that matches the path; returns nil otherwise.
+  # Assumes an extension of '.*' if one is not present.
+  def self.locate_first(path)
+    located_path = path.dup
+    located_path += ".*" if !has_extension?(located_path)
+    located_path.gsub!('\\', '/') # make Dir.glob happy
+    
+    Dir.glob(located_path)[0]     # naively pick first match
   end
+  
+  def self.has_extension?(path)
+    File.basename(path) != File.basename(path, '.*')
+  end
+  
+  def self.full_path?(path)
+    path == File.expand_path(path)
+  end
+  
+  def self.get_standard_path
+    common_path = System::Environment.get_folder_path(System::Environment::SpecialFolder.common_program_files)
+  
+    if (!common_path.nil? && !common_path.empty?)
+      return File.join(common_path, 'Enterbrain/RGSS/Standard/')
+    else
+      # TODO: Handle *nix here. Should it be something like the following?
+      #       /usr/share/games/rmxp
+      return nil
+    end
+  end
+
+public
+
+  # The standard RTP path.
+  STANDARD_PATH = get_standard_path
 
   # Finds a file path given a RTP file name.
   #   RTP.locate('Graphics/Tilesets/001-Grassland01')
@@ -27,23 +56,4 @@ module RTP
     return located_path
   end
 
-private
-
-  # Returns the first file that matches the path; returns nil otherwise.
-  # Assumes an extension of '.*' if one is not present.
-  def self.locate_first(path)
-    located_path = path
-    located_path = located_path + ".*" if !has_extension?(located_path)
-    located_path = located_path.gsub('\\', '/') # make Dir.glob happy
-    located_path = Dir.glob(located_path)[0]    # naively pick first one
-  end
-  
-  def self.has_extension?(path)
-    File.basename(path) != File.basename(path, '.*')
-  end
-  
-  def self.full_path?(path)
-    path == File.expand_path(path)
-  end
-  
 end
