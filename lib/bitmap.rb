@@ -1,4 +1,5 @@
 require 'font'
+require 'rtp'
 require 'System.Drawing'
 
 # The bitmap class. Bitmaps are expressions of so-called graphics.
@@ -7,15 +8,13 @@ class System::Drawing::Bitmap
   include System::Drawing
   
   # System::Drawing::Bitmap is sealed, so let's monkey patch this mofo
+  # TODO: Condsider this - instead of aliasing ::System::Drawing::Bitmap as ::Object::Bitmap, 
+  #       Create a new Bitmap class, and redefine Bitmap.new.
   class << self
     old_new = @old_new ||= System::Drawing::Bitmap.method(:new)
     define_method :new do |*args|
       if args.size == 1
-        path = args[0].gsub('\\','/') # gsub doesn't like windows' file seperator
-        if File.basename(path) == File.basename(path, '.*')
-          file_matches = Dir.glob(path + ".*")
-          path = file_matches[0]
-        end
+        path = RTP.locate(args[0])
         raise "Path is not valid: #{args[0]}" if path == nil
         bmp = old_new.call(path)
         bmp.font = ::Font.new
