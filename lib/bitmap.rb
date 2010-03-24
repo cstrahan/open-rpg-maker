@@ -2,9 +2,11 @@ require 'font'
 require 'rtp'
 require 'System.Drawing'
 
+Bitmap = System::Drawing::Bitmap
+
 # The bitmap class. Bitmaps are expressions of so-called graphics.
 # Sprites ({Sprite}) and other objects must be used to display bitmaps on the screen.
-class System::Drawing::Bitmap
+class Bitmap
   include System::Drawing
   
   # System::Drawing::Bitmap is sealed, so let's monkey patch this mofo
@@ -15,7 +17,7 @@ class System::Drawing::Bitmap
     define_method :new do |*args|
       if args.size == 1
         path = RTP.locate(args[0])
-        raise "Path is not valid: #{args[0]}" if path == nil
+        raise "Path is not valid: #{args[0]}" if path.nil?
         bmp = old_new.call(path)
         bmp.font = ::Font.new
         bmp
@@ -75,7 +77,14 @@ class System::Drawing::Bitmap
   # @param [Rect] src_rect the box section of the src_rect to transfer. 
   # @param [Number] opacity the opacity to use for the src_bitmap. Valid values: (0..255).
   def blt(x, y, src_bitmap, src_rect, opacity = 255)
-    raise "not implemented"
+    src_rectangle    = rect_to_rectangle(src_rect)
+    dest_rectangle   = rect_to_rectangle(src_rect)
+    dest_rectangle.x = x
+    dest_rectangle.y = y
+
+    with_graphics do |g|
+      g.draw_image(src_bitmap, dest_rectangle, src_rectangle, GraphicsUnit.pixel)
+    end  
   end
 
   # Performs a block transfer from the src_bitmap box src_rect to the specified bitmap box dest_rect (Rect).
@@ -169,6 +178,15 @@ class System::Drawing::Bitmap
      raise "not implemented"
   end
 
-end
+protected
 
-Bitmap = System::Drawing::Bitmap
+  def rect_to_rectangle(rect)
+    System::Drawing::Rectangle.new(rect.x, rect.y, rect.width, rect.height)
+  end
+
+  def with_graphics
+    g = System::Drawing::Graphics.from_image(self)
+    yield(g)
+    g.dispose
+  end
+end

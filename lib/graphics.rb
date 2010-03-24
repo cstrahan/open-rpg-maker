@@ -27,12 +27,21 @@ module Graphics
   # If this method is not called in 10 seconds or more, the program will view
   # the script as having run out of control and will force a quit.
   def self.update()
-    warn "need to implement Graphics.update"
     self.frame_count += 1
-    
-    bmp = Bitmap.new("C:\\source\\open-rpg-maker\\bin\\Graphics\\Icons\\001-Weapon01")
-    #bmp.draw_text "blah"
-    self.window.surface = bmp
+
+    # stable sort by z-index
+    n =0
+    c = lambda { |x| n+= 1; [x, n]}
+    sorted = Drawable.all.sort do |a, b|
+      c.call(a).z <=> c.call(b).z
+    end
+
+    scene = Bitmap.new(640, 480)
+    sorted.each do |d|
+      d.draw(scene)
+    end
+
+    self.window.surface = scene
   end
 
   # Fixes the current screen in preparation for transitions.

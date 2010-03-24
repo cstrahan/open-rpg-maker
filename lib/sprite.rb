@@ -1,10 +1,19 @@
+require 'drawable'
+require 'color'
+require 'tone'
+
 # The sprite class.
 # Sprites are the basic concept used to display
 # characters, etc. on the game screen.
-class Sprite
+class Sprite < Drawable
   # Refers to the {Bitmap} used for the sprite's starting point.
-  attr_accessor :bitmap
+  attr_reader :bitmap
   
+  def bitmap=(bmp)
+    @bitmap = bmp
+    self.src_rect = Rect.new(0, 0, bmp.width, bmp.height)
+  end
+
   # The box (Rect) taken from a bitmap.
   attr_accessor :src_rect
   
@@ -71,13 +80,30 @@ class Sprite
   attr_reader :viewport
 
   def initialize(viewport = nil)
+    super()
+    
     @viewport = viewport
+    self.src_rect = Rect.new(0, 0, 0, 0)
+    self.visible = true
+    self.x = 0
+    self.y = 0
+    self.z = 0
+    self.ox = 0
+    self.oy = 0
+    self.zoom_x = 0
+    self.zoom_y = 0
+    self.angle = 0
+    self.angle = 0
+    self.mirror = false
+    self.bush_depth = 0
+    self.opacity = 255
+    self.blend_type = 0
+    self.color = Color.new(0, 0, 0, 0)
+    self.tone = Tone.new(0, 0, 0, 0)
   end
 
   # Frees the sprite. If the sprite has already been freed, does nothing.
   def dispose
-    raise "not implemented"
-
     @disposed = true
   end
 
@@ -91,13 +117,15 @@ class Sprite
   #
   # If color is set to nil, the sprite will disappear while flashing.
   def flash(color, duration) 
-    raise "not implemented"
-  end  
+  end
 
   # Refreshes the sprite flash. As a rule, this method is called once per frame.
   #
   # It is not necessary to call this method if no flash effect is needed.
   def update
-    raise "not implemented"
-  end  
+  end
+
+  def draw(bmp)
+    bmp.blt(x, y, bitmap, src_rect, opacity)
+  end
 end
