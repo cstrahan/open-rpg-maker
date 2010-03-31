@@ -29,11 +29,8 @@ module Graphics
   def self.update()
     self.frame_count += 1
 
-    # stable sort by z-index
-    n =0
-    c = lambda { |x| n+= 1; [x, n]}
     sorted = Drawable.all.sort do |a, b|
-      c.call(a).z <=> c.call(b).z
+      a.z <=> b.z
     end
 
     scene = Bitmap.new(640, 480)

@@ -1,3 +1,7 @@
+require 'rect'
+require 'color'
+require 'tone'
+
 # The viewport class. Used when displaying sprites in one portion of the screen,
 # with no overflow into other regions.
 class Viewport
@@ -34,8 +38,18 @@ class Viewport
 
   # new(x, y, width, height)
   # new(rect)
-  def initialize
-    raise "not implemented"
+  def initialize(*args)
+    if args.length == 4
+      self.rect = Rect.new(*args)
+    elsif args.length == 1
+      self.rect = args[0]
+    else
+      raise "invalid arguments"
+    end
+    
+    self.visible = true
+    self.color = Color.new(0, 0, 0, 0)
+    self.tone = Tone.new(0, 0, 0, 0)
   end
 
   # Frees the viewport. If the viewport has already been freed, does nothing.
@@ -52,13 +66,11 @@ class Viewport
   #
   # If color is set to nil, the viewport will disappear while flashing.
   def flash(color, duration)
-    raise "not implemented"
   end
 
   # Refreshes the viewport flash. As a rule, this method is called once per frame.
   #
   # It is not necessary to call this method if no flash effect is needed.
   def update
-    raise "not implemented"
   end
 end

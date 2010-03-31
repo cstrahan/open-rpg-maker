@@ -73,6 +73,20 @@ class Table
 
     @items[key] = item
   end
+  
+  def yaml_initialize(tag, val)
+    @items = val["items"]
+    @xsize = val["xsize"]
+    @ysize = val["ysize"]
+    @zsize = val["zsize"]
+    @dimensions = val["dimensions"]
+    
+    if @dimensions == nil
+      @dimensions = 1
+      @dimensions = 2 if @ysize > 1
+      @dimensions = 3 if @zsize > 1
+    end
+  end
 
 private
 

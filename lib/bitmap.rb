@@ -7,7 +7,6 @@ Bitmap = System::Drawing::Bitmap
 # The bitmap class. Bitmaps are expressions of so-called graphics.
 # Sprites ({Sprite}) and other objects must be used to display bitmaps on the screen.
 class Bitmap
-  include System::Drawing
   
   # System::Drawing::Bitmap is sealed, so let's monkey patch this mofo
   # TODO: Condsider this - instead of aliasing ::System::Drawing::Bitmap as ::Object::Bitmap, 
@@ -59,7 +58,7 @@ class Bitmap
 
   # Frees the bitmap. If the bitmap has already been freed, does nothing.
   def dispose
-    self.dispose
+    self.clr_member(:Dispose).call
     @disposed = true
   end
 
@@ -83,8 +82,8 @@ class Bitmap
     dest_rectangle.y = y
 
     with_graphics do |g|
-      g.draw_image(src_bitmap, dest_rectangle, src_rectangle, GraphicsUnit.pixel)
-    end  
+      g.draw_image(src_bitmap, dest_rectangle, src_rectangle, System::Drawing::GraphicsUnit.pixel)
+    end
   end
 
   # Performs a block transfer from the src_bitmap box src_rect to the specified bitmap box dest_rect (Rect).
@@ -95,7 +94,12 @@ class Bitmap
   # @param [Rect] src_rect 
   # @param [Number] opacity 
   def stretch_blt(dest_rect, src_bitmap, src_rect, opacity = 255)
-    raise "not implemented"
+    src_rectangle    = rect_to_rectangle(src_rect)
+    dest_rectangle   = rect_to_rectangle(dest_rect)
+
+    with_graphics do |g|
+      g.draw_image(src_bitmap, dest_rectangle, src_rectangle, System::Drawing::GraphicsUnit.pixel)
+    end
   end
 
   # Fills the bitmap box (x, y, width, height) or rect (Rect) with color (Color).
@@ -113,7 +117,7 @@ class Bitmap
       raise "invalid number of arguments"
     end
 
-    rectangle = Rectangle.new(rect.x, rect.y, rect.width, rect.height)
+    rectangle = System::Drawing::Rectangle.new(rect.x, rect.y, rect.width, rect.height)
     brush = System::Drawing::SolidBrush.new(System::Drawing::Color.from_argb(color.alpha, color.red, color.green, color.blue))
     System::Drawing::Graphics.from_image(self).fill_rectangle(brush, rectangle)
   end
@@ -167,7 +171,7 @@ class Bitmap
     style |= System::Drawing::FontStyle.bold if self.font.bold
     style |= System::Drawing::FontStyle.italic if self.font.italic
 
-    brush = System::Drawing::SolidBrush.new(Color.from_argb(self.font.color.alpha, self.font.color.red, self.font.color.green, self.font.color.blue))
+    brush = System::Drawing::SolidBrush.new(System::Drawing::Color.from_argb(self.font.color.alpha, self.font.color.red, self.font.color.green, self.font.color.blue))
     font = System::Drawing::Font.new(self.font.name, self.font.size, style, System::Drawing::GraphicsUnit.point)
     System::Drawing::Graphics.from_image(self).draw_string(str, font, brush, rect.x, rect.y)
   end

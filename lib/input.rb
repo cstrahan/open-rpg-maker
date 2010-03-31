@@ -1,8 +1,23 @@
 # A module that handles input data from a gamepad or keyboard.
 module Input
+
+  @pressed_buffer   = Hash.new(false)
+  @triggered_buffer = Hash.new(false)
+  @repeated_buffer  = Hash.new(false)
+
+  @pressed_current   = Hash.new(false)
+  @triggered_current = Hash.new(false)
+  @repeated_current  = Hash.new(false)
+
   # Updates input data. As a rule, this method is called once per frame.
   def self.update()
-    warn 'need to implement Input.update'
+    @pressed_current.merge!(@pressed_buffer)
+    @triggered_current.merge!(@triggered_buffer)
+    @repeated_current.merge!(@repeated_buffer)
+
+    @pressed_buffer   = Hash.new(false)
+    @triggered_buffer = Hash.new(false)
+    @repeated_buffer  = Hash.new(false)
   end
 
   # Determines whether the button num is currently being pressed.
@@ -14,7 +29,7 @@ module Input
   #   do_something
   # end
   def self.press?(num)
-    warn 'need to implement Input.press?'
+    @pressed_current[num]
   end
 
   # Determines whether the button num is being pressed again.
@@ -24,7 +39,7 @@ module Input
   #
   # If the button is being pressed, returns TRUE. If not, returns FALSE.
   def self.trigger?(num)
-    warn 'need to implement Input.trigger?'
+    @triggered_current[num]
   end
 
   # Determines whether the button num is being pressed again.
@@ -34,7 +49,7 @@ module Input
   #
   # If the button is being pressed, returns TRUE. If not, returns FALSE.
   def self.repeat?(num)
-    warn 'need to implement Input.repeat?'
+    @repeated_current[num]
   end
 
   # Checks the status of the directional buttons, translates the data
@@ -43,7 +58,6 @@ module Input
   # 
   # If no directional buttons are being pressed (or the equivalent), returns 0.
   def self.dir4()
-    warn 'need to implement Input.dir4'
   end
 
   # Checks the status of the directional buttons, translates the data into
@@ -52,7 +66,20 @@ module Input
   #
   # If no directional buttons are being pressed (or the equivalent), returns 0.
   def self.dir8()
-    warn 'need to implement Input.dir8'
+  end
+
+
+
+  def self.set_pressed(num, bool)
+    @pressed_buffer[num] = bool
+  end
+
+  def self.set_triggered(num, bool)
+    @triggered_buffer[num] = bool
+  end
+
+  def self.set_repeated(num, bool)
+    @repeated_buffer[num] = bool
   end
 
   DOWN  = 2

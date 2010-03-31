@@ -81,7 +81,6 @@ class Sprite < Drawable
 
   def initialize(viewport = nil)
     super()
-    
     @viewport = viewport
     self.src_rect = Rect.new(0, 0, 0, 0)
     self.visible = true
