@@ -19,5 +19,8 @@ Graphics.window = stub
 
 #set_trace_func proc { |event, file, line, id, binding, classname| printf "%8s %s:%-2d %10s %8s\n", event, file, line, id, classname } 
 
+#Input::set_triggered(Input::C, true)
+
+
 # Load all game scripts
 load File.join(dir, 'script_loader.rb')
