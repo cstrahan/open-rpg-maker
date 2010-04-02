@@ -18,7 +18,7 @@ class Sprite < Drawable
   attr_accessor :src_rect
   
   # The sprite's visibility. If TRUE, the sprite is visible.
-  attr_accessor :visible 
+  attr_accessor :visible
 
   # The sprite's X-coordinate.
   attr_accessor :x
@@ -82,23 +82,22 @@ class Sprite < Drawable
   def initialize(viewport = nil)
     super()
     @viewport = viewport
-    self.src_rect = Rect.new(0, 0, 0, 0)
-    self.visible = true
-    self.x = 0
-    self.y = 0
-    self.z = 0
-    self.ox = 0
-    self.oy = 0
-    self.zoom_x = 0
-    self.zoom_y = 0
-    self.angle = 0
-    self.angle = 0
-    self.mirror = false
-    self.bush_depth = 0
-    self.opacity = 255
-    self.blend_type = 0
-    self.color = Color.new(0, 0, 0, 0)
-    self.tone = Tone.new(0, 0, 0, 0)
+    @src_rect = Rect.new(0, 0, 0, 0)
+    @visible = true
+    @x = 0
+    @y = 0
+    @z = 0
+    @ox = 0
+    @oy = 0
+    @zoom_x = 0
+    @zoom_y = 0
+    @angle = 0
+    @mirror = false
+    @bush_depth = 0
+    @opacity = 255
+    @blend_type = 0
+    @color = Color.new(0, 0, 0, 0)
+    @tone = Tone.new(0, 0, 0, 0)
   end
 
   # Frees the sprite. If the sprite has already been freed, does nothing.
@@ -125,6 +124,12 @@ class Sprite < Drawable
   end
 
   def draw(bmp)
-    bmp.blt(x, y, bitmap, src_rect, opacity)
+    unless bitmap.nil? || !visible
+      begin
+        bmp.blt(x, y, bitmap, src_rect, opacity)
+      rescue ArgumentError => e # WTF?
+        #p x, y, bitmap, src_rect, opacity
+      end
+    end
   end
 end

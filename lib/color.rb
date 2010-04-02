@@ -35,6 +35,14 @@ class Color
     self.alpha = alpha
   end
   
+  def _dump(d = 0)
+    [@red, @green, @blue, @alpha].pack('d4')
+  end
+  
+  def self._load(s)
+    Color.new(*s.unpack('d4'))
+  end
+  
 private
 
   def constrain(val, range)

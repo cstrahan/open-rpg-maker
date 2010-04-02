@@ -5,13 +5,14 @@ while true
   Graphics.update
   Input.update
   s.bitmap.clear
-  s.bitmap.draw_text(Rect.new(0,0,300,25), "press?#{Input.press?(Input::C)}")
-  s.bitmap.draw_text(Rect.new(0,25,300,25), "trigger?#{Input.trigger?(Input::C)}")
-  s.bitmap.draw_text(Rect.new(0,50,300,25), "repeat?#{Input.repeat?(Input::C)}")
+  s.bitmap.draw_text(Rect.new(0,0,300,25), "press?#{Input.press?(Input::DOWN)}")
+  s.bitmap.draw_text(Rect.new(0,25,300,25), "trigger?#{Input.trigger?(Input::DOWN)}")
+  s.bitmap.draw_text(Rect.new(0,50,300,25), "repeat?#{Input.repeat?(Input::DOWN)}")
 end
 =end
 
-Input.set_triggered(Input::C, true)
+#Input.set_triggered(Input::C, true)
+#Input.set_triggered(Input::B, true)
 
 #==============================================================================
 # ** Main

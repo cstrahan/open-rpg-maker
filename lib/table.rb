@@ -2,6 +2,7 @@
 #
 # Ruby's Array class does not run efficiently when handling large amounts of data, hence the inclusion of this class.
 class Table
+  
   # Gets the x dimension of the array.
   # @return [Integer]
   attr_reader :xsize
@@ -14,90 +15,37 @@ class Table
   # @return [Integer]
   attr_reader :zsize
 
-  def initialize(xsize, ysize=nil, zsize=nil)
-    raise "invalid params - expected (xsize[, ysize[, zsize]])" unless params_valid?(xsize, ysize, zsize)
-
-    @dimensions = dimensions(xsize, ysize, zsize)
-    @items = {}
-
-    resize(xsize, ysize, zsize)
-  end
-
   # Change the size of the array. All data from before the size change is retained.
-  def resize(xsize, ysize=nil, zsize=nil)
-    raise "invalid params - expected (xsize[, ysize[, zsize]])" unless params_valid?(xsize, ysize, zsize)
-    raise "wrong # of sizes" if dimensions(xsize, ysize, zsize) != @dimensions
-
-    # Set and coerce the nsize variables
-    @xsize, @ysize, @zsize = xsize || 1, ysize || 1, zsize || 1
-  end
-
-  # Accesses the array's elements. Pulls the same number of arguments as there
-  # are dimensions in the created array. Returns nil if the specified element does not exist.
-  def [](x, y=nil, z=nil)
-    raise unless params_valid?(x, y, z)
-    raise "wrong # of indecies" if dimensions(x, y, z) != @dimensions
-
-    return nil unless (0..@xsize).include?(x || 0) and
-                      (0..@ysize).include?(y || 0) and
-                      (0..@zsize).include?(z || 0)
-
-    case @dimensions
-    when 1
-      key = [x]
-    when 2
-      key = [x,y]
-    when 3
-      key = [x,y,z]
-    end
-
-    @items[key]
-  end
-
-  def []=(*args)
-    raise "wrong # of indecies" if not args.size == (@dimensions + 1)
-    x, y, z = args.first(@dimensions)
-    raise if not params_valid?(x, y, z)
-    raise "wrong # of indecies" if dimensions(x, y, z) != @dimensions  
-
-    item = args[-1]
-
-    case @dimensions
-    when 1
-      key = [x]
-    when 2
-      key = [x,y]
-    when 3
-      key = [x,y,z]
-    end
-
-    @items[key] = item
+  def initialize(x, y = 0, z = 0)
+     @dim = 1 + (y > 0 ? 1 : 0) + (z > 0 ? 1 : 0)
+     @xsize, @ysize, @zsize = x, [y, 1].max, [z, 1].max
+     @data = Array.new(x * y * z, 0)
   end
   
-  def yaml_initialize(tag, val)
-    @items = val["items"]
-    @xsize = val["xsize"]
-    @ysize = val["ysize"]
-    @zsize = val["zsize"]
-    @dimensions = val["dimensions"]
-    
-    if @dimensions == nil
-      @dimensions = 1
-      @dimensions = 2 if @ysize > 1
-      @dimensions = 3 if @zsize > 1
-    end
+  # Accesses the array's elements. Pulls the same number of arguments as there
+  # are dimensions in the created array. Returns nil if the specified element does not exist.
+  def [](x, y = 0, z = 0)
+     @data[x + y * @xsize + z * @xsize * @ysize]
   end
-
-private
-
-  def params_valid?(x, y, z)
-    return !x.nil? && !(y.nil? && !z.nil?)
+  
+  def []=(*args)
+     x = args[0]
+     y = args.size > 2 ? args[1] : 0
+     z = args.size > 3 ? args[2] : 0
+     v = args.pop
+     @data[x + y * @xsize + z * @xsize * @ysize] = v
   end
-
-  def dimensions(x, y, z)
-    return (x == nil ? 0 : 1) +
-           (y == nil ? 0 : 1) +
-           (z == nil ? 0 : 1)
+  
+  def _dump(d = 0)
+     [@dim, @xsize, @ysize, @zsize, @xsize * @ysize * @zsize].pack('LLLLL') <<
+     @data.pack("S#{@xsize * @ysize * @zsize}")
   end
-
+  
+  def self._load(s)
+     size, nx, ny, nz, items = *s[0, 20].unpack('LLLLL')
+     t = Table.new(*[nx, ny, nz][0,size])
+     data = s[20, items * 2].unpack("S#{items}")
+     t.instance_variable_set("@data", data)
+     t
+  end
 end

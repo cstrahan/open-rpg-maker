@@ -39,15 +39,22 @@ class Plane
 
   # Creates a Plane object. Specifies a Viewport (Viewport) when necessary.
   def initialize(viewport = nil)
-    raise "not implemented"
-
+    super()
     @viewport = viewport
+    @visible = true
+    @z = 0
+    @ox = 0
+    @oy = 0
+    @zoom_x = 0
+    @zoom_y = 0
+    @opacity = 255
+    @blend_type = 0
+    @color = Color.new(0, 0, 0, 0)
+    @tone = Tone.new(0, 0, 0, 0)
   end
 
   # Frees the plane. If the plane has already been freed, does nothing.
   def dispose
-    raise "not implemented"
-
     @disposed = true
   end
 

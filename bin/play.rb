@@ -1,3 +1,4 @@
+require 'System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
 require 'System.Windows.Forms'
 require 'System.Drawing'
 require 'singleton'
@@ -28,25 +29,35 @@ class MainForm < System::Windows::Forms::Form
     end
 
     
-    key_map = { Keys::space  => Input::C, Keys::enter    => Input::C,
-                Keys::escape => Input::B, Keys::num_pad0 => Input::B,
-                Keys::shift  => Input::A, Keys::z        => Input::A,
-                Keys::x      => Input::B, Keys::c        => Input::C,
-                Keys::a      => Input::X, Keys::s        => Input::Y,
-                Keys::d      => Input::Z, Keys::q        => Input::L,
-                Keys::w      => Input::R, Keys::enter    => Input::C }
+    key_map = { Keys.space  => Input::C,      Keys.enter    => Input::C,
+                Keys.escape => Input::B,      Keys.num_pad0 => Input::B,
+                Keys.shift  => Input::A,      Keys.z        => Input::A,
+                Keys.x      => Input::B,      Keys.c        => Input::C,
+                Keys.a      => Input::X,      Keys.s        => Input::Y,
+                Keys.d      => Input::Z,      Keys.q        => Input::L,
+                Keys.w      => Input::R,      Keys.enter    => Input::C,
+                Keys.down   => Input::DOWN,   Keys.left     => Input::LEFT,
+                Keys.right  => Input::RIGHT,  Keys.up       => Input::UP }
+
+    dir_inputs = [ Input::DOWN, Input::LEFT, Input::RIGHT, Input::UP ]
+      #Input.set_dir4(key_map[e.key_code]) if dir_map[e.key_code]
 
     self.key_down do |sender, e|
       Input.set_pressed(key_map[e.key_code], true)
       Input.set_triggered(key_map[e.key_code], true)
       Input.set_repeated(key_map[e.key_code], true)
+
+      Input.set_dir4(key_map[e.key_code]) if dir_inputs.include? key_map[e.key_code]
     end
 
     self.key_up do |sender, e|
       Input.set_pressed(key_map[e.key_code], false)
       Input.set_triggered(key_map[e.key_code], false)
       Input.set_repeated(key_map[e.key_code], false)
+
+      Input.set_dir4(key_map[0]) if dir_inputs.include? key_map[e.key_code]
     end
+
   end
   
   def surface=(bmp)

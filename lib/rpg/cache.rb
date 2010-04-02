@@ -23,6 +23,9 @@ module RPG
   module Cache
     @cache = {}
     def self.load_bitmap(folder_name, filename, hue = 0)
+      p "#{folder_name}"
+      p "#{filename}"
+
       path = folder_name + filename
       if not @cache.include?(path) or @cache[path].disposed?
         if filename != ""

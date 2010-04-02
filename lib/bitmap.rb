@@ -40,7 +40,7 @@ class Bitmap
 
   # Gets the bitmap rectangle.
   # @return [Rect] the bitmap rectangle.
-  def Rect
+  def rect
     Rect.new(0, 0, width, height)
   end
 
@@ -130,18 +130,15 @@ class Bitmap
 
   # Gets the {Color} at the specified pixel (x, y).
   def get_pixel(x, y)
-    raise "not implemented"
   end
 
   # Sets the specified pixel (x, y) to the specified {Color}.
   def set_pixel(x, y, color)
-    raise "not implemented"
   end
 
   # Changes the bitmap's hue within 360 degrees of displacement.
   # This process is time-consuming. Furthermore, due to conversion errors, repeated hue changes may result in color loss.
   def hue_change(hue)
-    raise "not implemented"
   end
 
   # Draws a string str in the bitmap box (x, y, width, height) or rect (Rect).  
@@ -179,7 +176,6 @@ class Bitmap
   # @return [Rect] the box used when drawing a string str with the draw_text method.
   #   Does not include the angled portions of italicized text.
   def text_size(str)
-     raise "not implemented"
   end
 
 protected
