@@ -12,16 +12,15 @@ class Bitmap
   # TODO: Condsider this - instead of aliasing ::System::Drawing::Bitmap as ::Object::Bitmap, 
   #       Create a new Bitmap class, and redefine Bitmap.new.
   class << self
-    old_new = @old_new ||= System::Drawing::Bitmap.method(:new)
     define_method :new do |*args|
       if args.size == 1
         path = RTP.locate(args[0])
         raise "Path is not valid: #{args[0]}" if path.nil?
-        bmp = old_new.call(path)
+        bmp = self.clr_new(path)
         bmp.font = ::Font.new
         bmp
       elsif args.size == 2
-        bmp = old_new.call(args[0], args[1])
+        bmp = self.clr_new(args[0], args[1])
         bmp.font = ::Font.new
         bmp
       end
