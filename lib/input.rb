@@ -9,7 +9,8 @@ module Input
   @triggered_current = Hash.new(false)
   @repeated_current  = Hash.new(false)
 
-  @dir4 = 0
+  @dir4_buffer = 0
+  @dir4_current = 0
 
   # Updates input data. As a rule, this method is called once per frame.
   def self.update()
@@ -20,6 +21,8 @@ module Input
     @pressed_buffer   = Hash.new(false)
     @triggered_buffer = Hash.new(false)
     @repeated_buffer  = Hash.new(false)
+
+    @dir4_current = @dir4_buffer
   end
 
   # Determines whether the button num is currently being pressed.
@@ -60,7 +63,7 @@ module Input
   # 
   # If no directional buttons are being pressed (or the equivalent), returns 0.
   def self.dir4()
-    @dir4
+    @dir4_current
   end
 
   # Checks the status of the directional buttons, translates the data into
@@ -86,7 +89,7 @@ module Input
   end
 
   def self.set_dir4(num)
-    @dir4 = num
+    @dir4_buffer = num
   end
 
   DOWN  = 2
