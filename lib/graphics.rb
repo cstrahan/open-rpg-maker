@@ -1,3 +1,5 @@
+require 'enumerator'
+
 module Graphics
   class << self
     # In [Smooth Mode], the number of times the screen is refreshed per second.
@@ -29,7 +31,7 @@ module Graphics
   def self.update()
     self.frame_count += 1
 
-    sorted = Drawable.all.sort do |a, b|
+    sorted = stable_sort(Drawable.all) do |a, b|
       a.z <=> b.z
     end
 
@@ -70,4 +72,11 @@ module Graphics
   def self.frame_reset()
     warn "need to implement Graphics.frame_reset"
   end
+  
+private
+
+  def self.stable_sort(items)
+    items.to_enum(:each_with_index).sort { |a, b| yield(a[0], b[0]) }.collect { |i| i[0] }
+  end
+
 end

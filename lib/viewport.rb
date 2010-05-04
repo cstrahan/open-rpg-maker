@@ -48,8 +48,10 @@ class Viewport
     end
     
     self.visible = true
+    self.ox = self.oy = self.z = 0
     self.color = Color.new(0, 0, 0, 0)
     self.tone = Tone.new(0, 0, 0, 0)
+    @disposed = false
   end
 
   # Frees the viewport. If the viewport has already been freed, does nothing.

@@ -124,7 +124,7 @@ class Sprite < Drawable
   end
 
   def draw(bmp)
-    unless bitmap.nil? || !visible
+    unless bitmap.nil? || !visible || opacity == 0
       begin
         bmp.blt(x, y, bitmap, src_rect, opacity)
       rescue ArgumentError => e # WTF?

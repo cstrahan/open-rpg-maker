@@ -176,6 +176,10 @@ class Bitmap
   #   Does not include the angled portions of italicized text.
   def text_size(str)
   end
+  
+  def dup
+    clr_member(:Clone).call
+  end
 
 protected
 
