@@ -1,0 +1,13 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="RMXPx" EntryPointType="RMXPx.App" RuntimeVersion="4.0.50401.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="RMXPx" Source="RMXPx.dll" />
+    <AssemblyPart x:Name="IronRuby" Source="IronRuby.dll" />
+    <AssemblyPart x:Name="IronRuby.Libraries" Source="IronRuby.Libraries.dll" />
+    <AssemblyPart x:Name="Microsoft.Dynamic" Source="Microsoft.Dynamic.dll" />
+    <AssemblyPart x:Name="Microsoft.Scripting.Debugging" Source="Microsoft.Scripting.Debugging.dll" />
+    <AssemblyPart x:Name="Microsoft.Scripting" Source="Microsoft.Scripting.dll" />
+    <AssemblyPart x:Name="Microsoft.Scripting.Silverlight" Source="Microsoft.Scripting.Silverlight.dll" />
+    <AssemblyPart x:Name="WriteableBitmapEx" Source="WriteableBitmapEx.dll" />
+    <AssemblyPart x:Name="System.Numerics" Source="System.Numerics.dll" />
+  </Deployment.Parts>
+</Deployment>

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3A402D7C-86F8-4F5A-AE40-A05A9ACE4DBC}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RMXPx</RootNamespace>
+    <AssemblyName>RMXPx</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>RMXPx.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>RMXPx.App</SilverlightAppEntry>
+    <TestPageFileName>RMXPxTestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>false</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>
+    </LinkedServerProject>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IronRuby">
+      <HintPath>..\..\lib\sl4\IronRuby.dll</HintPath>
+    </Reference>
+    <Reference Include="IronRuby.Libraries">
+      <HintPath>..\..\lib\sl4\IronRuby.Libraries.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic">
+      <HintPath>..\..\lib\sl4\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting">
+      <HintPath>..\..\lib\sl4\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Debugging">
+      <HintPath>..\..\lib\sl4\Microsoft.Scripting.Debugging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Silverlight">
+      <HintPath>..\..\lib\sl4\Microsoft.Scripting.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="WriteableBitmapEx">
+      <HintPath>..\..\lib\sl4\WriteableBitmapEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bitmap.cs" />
+    <Compile Include="BitmapOps.cs" />
+    <Compile Include="Color.cs" />
+    <Compile Include="FontOps.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Font.cs" />
+    <Compile Include="Graphics.cs" />
+    <Compile Include="Initializers.Generated.cs" />
+    <Compile Include="IRenderable.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rect.cs" />
+    <Compile Include="RGSSError.cs" />
+    <Compile Include="Scripting\AssemblyResourceVirtualFilesystem.cs" />
+    <Compile Include="Scripting\PathUtil.cs" />
+    <Compile Include="Scripting\ResourceInspector.cs" />
+    <Compile Include="Scripting\RMXPxScriptHost.cs" />
+    <Compile Include="Scripting\SilverlightPAL.cs" />
+    <Compile Include="Scripting\WebXapFileLoader.cs" />
+    <Compile Include="Scripting\XapInspector.cs" />
+    <Compile Include="Scripting\XapVirtualFilesystem.cs" />
+    <Compile Include="Sprite.cs" />
+    <Compile Include="SpriteOps.cs" />
+    <Compile Include="Sync.cs" />
+    <Compile Include="Timer.cs" />
+    <Compile Include="Tone.cs" />
+    <Compile Include="Viewport.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AppManifest.xml" />
+    <Content Include="rb\audio.rb" />
+    <Content Include="rb\bitmap.rb" />
+    <Content Include="rb\builtins.rb" />
+    <Content Include="rb\color.rb" />
+    <Content Include="rb\font.rb" />
+    <Content Include="rb\graphics.rb" />
+    <Content Include="rb\input.rb" />
+    <Content Include="rb\plane.rb" />
+    <Content Include="rb\rect.rb" />
+    <Content Include="rb\rgss_error.rb" />
+    <Content Include="rb\rpg.rb" />
+    <Content Include="rb\rpg\actor.rb" />
+    <Content Include="rb\rpg\animation.rb" />
+    <Content Include="rb\rpg\armor.rb" />
+    <Content Include="rb\rpg\audio_file.rb" />
+    <Content Include="rb\rpg\cache.rb" />
+    <Content Include="rb\rpg\class.rb" />
+    <Content Include="rb\rpg\common_event.rb" />
+    <Content Include="rb\rpg\enemy.rb" />
+    <Content Include="rb\rpg\event.rb" />
+    <Content Include="rb\rpg\event_command.rb" />
+    <Content Include="rb\rpg\item.rb" />
+    <Content Include="rb\rpg\map.rb" />
+    <Content Include="rb\rpg\map_info.rb" />
+    <Content Include="rb\rpg\move_command.rb" />
+    <Content Include="rb\rpg\move_route.rb" />
+    <Content Include="rb\rpg\skill.rb" />
+    <Content Include="rb\rpg\sprite.rb" />
+    <Content Include="rb\rpg\state.rb" />
+    <Content Include="rb\rpg\system.rb" />
+    <Content Include="rb\rpg\tileset.rb" />
+    <Content Include="rb\rpg\troop.rb" />
+    <Content Include="rb\rpg\weapon.rb" />
+    <Content Include="rb\rpg\weather.rb" />
+    <Content Include="rb\sprite.rb" />
+    <Content Include="rb\table.rb" />
+    <Content Include="rb\tilemap.rb" />
+    <Content Include="rb\tone.rb" />
+    <Content Include="rb\viewport.rb" />
+    <Content Include="rb\window.rb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

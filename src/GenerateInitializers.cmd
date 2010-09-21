@@ -1,0 +1,1 @@
+ClassInitGenerator\ClassInitGenerator.exe "RMXPxIR\bin\Debug\RMXPxIR.dll" /libraries:RMXPx /out:RMXPx\Initializers.Generated.cs

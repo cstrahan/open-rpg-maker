@@ -34,3 +34,8 @@ deploy/*
 
 # Exclude ALL DLLs?
 #*.dll
+
+
+
+# Exclude the zip files
+*.zip
