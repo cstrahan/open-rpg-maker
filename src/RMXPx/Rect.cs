@@ -33,6 +33,11 @@ namespace RMXPx
             return new Rect((int)intersect.X, (int)intersect.Y, (int)intersect.Width, (int)intersect.Height);
         }
 
+        public static implicit operator System.Windows.Rect(Rect rect)
+        {
+            return new System.Windows.Rect(rect.X, rect.Y, rect.Width, rect.Height);
+        }
+
         [RubyConstructor]
         public static Rect Create(RubyClass self, int x, int y, int width, int height)
         {

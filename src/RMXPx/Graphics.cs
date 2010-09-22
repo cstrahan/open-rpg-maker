@@ -84,11 +84,11 @@ namespace RMXPx
                     foreach (var sprite1 in viewport.Sprites)
                     {
                         surface.Blt(
-                            viewport.Rect.X - viewport.OX + sprite1.X - sprite1.OX, 
-                            viewport.Rect.Y - viewport.OY + sprite1.Y - sprite1.OX, 
-                            sprite1.Bitmap, 
+                            viewport.Rect.X - viewport.OX + sprite1.X - sprite1.OX,
+                            viewport.Rect.Y - viewport.OY + sprite1.Y - sprite1.OX,
+                            sprite1.Bitmap,
                             sprite1.ActualSrcRect,
-                            sprite1.Opacity, 
+                            sprite1.Opacity,
                             sprite1.BlendType);
                     }
                     // TODO: draw the viewport's color, tone and flash
@@ -96,7 +96,7 @@ namespace RMXPx
             }
 
 #if SILVERLIGHT
-            _dispatcher.BeginInvoke(() => surface.Invalidate());
+            Sync.Action(surface.Invalidate);
 #endif
             //surface.Invalidate();
             SetFrameCount(self, GetFrameCount(self) + 1);

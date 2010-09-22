@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Scripting.Runtime;
@@ -137,10 +139,40 @@ namespace RMXPx
         public void StretchBlt([NotNull]Rect/*!*/ destRect, [NotNull]Bitmap/*!*/ sourceBitmap,
             [NotNull]Rect/*!*/ sourceRect, [Optional]int? opacity)
         {
-            opacity = opacity == null || opacity > 255 ? 255 : opacity;
-            opacity = opacity < 0 ? 0 : opacity;
+#if SILVERLIGHT
+            Sync.Action(() =>
+                            {
+                                opacity = opacity == null || opacity > 255 ? 255 : opacity;
+                                opacity = opacity < 0 ? 0 : opacity;
 
-            // TODO: impl
+                                double scaleX = destRect.Width/(double) sourceRect.Width;
+                                double scaleY = destRect.Height/(double) sourceRect.Height;
+
+                                var sourceImage = new Image();
+                                sourceImage.Source = sourceBitmap._writableBitmap;
+                                sourceImage.Width = sourceBitmap.Width;
+                                sourceImage.Height = sourceBitmap.Height;
+                                sourceImage.Measure(new Size(sourceBitmap.Width, sourceBitmap.Height));
+
+                                var viewBox = new Viewbox();
+                                viewBox.Child = sourceImage;
+                                viewBox.Stretch = Stretch.Fill;
+                                viewBox.Width = sourceBitmap.Width*scaleX;
+                                viewBox.Height = sourceBitmap.Height*scaleY;
+                                viewBox.UpdateLayout();
+                                viewBox.Measure(new Size(viewBox.Width, viewBox.Height));
+                                viewBox.Arrange(new Rect(0, 0, (int) viewBox.Width, (int) viewBox.Height));
+
+                                var scaledBitmap = new WriteableBitmap(viewBox, null);
+                                scaledBitmap.Invalidate();
+
+                                _writableBitmap.Blit(
+                                    destRect,
+                                    scaledBitmap,
+                                    new System.Windows.Rect(sourceRect.X*scaleX, sourceRect.Y*scaleY,
+                                                            sourceRect.Width*scaleX, sourceRect.Height*scaleY));
+                            });
+#endif
         }
 
         public void FillRect(int x, int y, int width, int height, Color color)
@@ -195,12 +227,103 @@ namespace RMXPx
 
         public void DrawText(int x, int y, int width, int height, string str, int align)
         {
-            // TODO: impl
+            if (align != 0 && align != 1 && align != 2)
+            {
+                throw new ArgumentOutOfRangeException("align", "Expected an alignment of 0, 1 or 2");
+            }
+#if SILVERLIGHT
+            Sync.Action(() =>
+                            {
+                                TextBlock textBlock = new TextBlock();
+                                textBlock.Foreground = 
+                                    new SolidColorBrush(
+                                        System.Windows.Media.Color.FromArgb(
+                                            (byte)Font.Color.Alpha,
+                                            (byte)Font.Color.Red,
+                                            (byte)Font.Color.Green,
+                                            (byte)Font.Color.Blue));
+                                textBlock.Text = str;
+                                textBlock.FontFamily = new FontFamily(Font.Name);
+                                textBlock.FontSize = Font.Size;
+                                if (Font.Italic) textBlock.FontStyle = FontStyles.Italic;
+                                if (Font.Bold) textBlock.FontWeight = FontWeights.Bold;
+
+                                // Get the percentage we will need to shrink the text by
+                                // (needs to be done regardless of alignment)
+                                double scaleX = 1;
+                                var actualWidth = textBlock.ActualWidth;
+                                if (actualWidth > width)
+                                {
+                                    var diff = actualWidth - width;
+                                    var percentage = diff/actualWidth;
+                                    if (percentage >= 0.60) percentage = 0.60;
+                                    scaleX = 1.00 - percentage;
+                                }
+
+                                // Figure out how far from the left we need to draw
+                                double translateX;
+                                switch (align)
+                                {
+                                    case 1:
+                                        if (actualWidth >= width)
+                                        {
+                                            translateX = 0;
+                                        }
+                                        else
+                                        {
+                                            var midpoint = width/2;
+                                            translateX = midpoint - ((actualWidth)/2);
+                                        }
+                                        break;
+                                    case 2:
+                                        if (actualWidth >= width)
+                                        {
+                                            translateX = 0;
+                                        }
+                                        else
+                                        {
+                                            translateX = width - actualWidth;
+                                        }
+                                        break;
+                                    case 0:
+                                    default:
+                                        translateX = 0;
+                                        break;
+                                }
+
+                                // Figure out the vertical location of the text
+                                var actualHeight = textBlock.ActualHeight;
+                                double translateY;
+                                if (actualHeight >= height)
+                                {
+                                    translateY = 0;
+                                }
+                                else
+                                {
+                                    var midpoint = height/2;
+                                    translateY = (midpoint - (actualHeight/2));
+                                }
+
+                                var transform = new CompositeTransform();
+                                transform.ScaleX = scaleX;
+                                transform.TranslateX = translateX;
+                                transform.TranslateY = translateY;
+
+                                WriteableBitmap bitmap = new WriteableBitmap((int) width, (int) height);
+                                bitmap.Render(textBlock, transform);
+
+                                _writableBitmap.Blit(
+                                    new System.Windows.Rect(x, y, width, height),
+                                    bitmap,
+                                    new System.Windows.Rect(0, 0, width, height),
+                                    WriteableBitmapExtensions.BlendMode.Alpha);
+                            });
+#endif
         }
 
         public void DrawText(Rect rect, string str, int align)
         {
-            // TODO: impl
+            DrawText(rect.X, rect.Y, rect.Width, rect.Height, str, align);
         }
 
         public void SetTextSize(string str)

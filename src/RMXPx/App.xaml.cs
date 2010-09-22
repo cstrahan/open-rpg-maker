@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Browser;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using IronRuby.Builtins;
@@ -62,9 +63,9 @@ namespace RMXPx
             return setup;
         }
 
-
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            
             //var resources = ResourceInspector.Inspect(Assembly.GetExecutingAssembly());
             //foreach (var resource in resources)
             //{
