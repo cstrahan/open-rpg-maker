@@ -40,6 +40,7 @@ namespace RMXPx {
             DefineGlobalClass("RGSSError", typeof(RMXPx.RGSSError), 0x00000008, classRef1, null, null, null, IronRuby.Builtins.RubyModule.EmptyArray, 
             new Func<IronRuby.Builtins.RubyClass, System.Object, System.Exception>(RMXPxLibraryInitializer.ExceptionFactory__RGSSError));
             DefineGlobalClass("Sprite", typeof(RMXPx.Sprite), 0x00000000, classRef0, LoadSprite_Instance, null, null, IronRuby.Builtins.RubyModule.EmptyArray, 
+                new Func<IronRuby.Builtins.RubyClass, RMXPx.Sprite>(RMXPx.SpriteOps.Create), 
                 new Func<IronRuby.Builtins.RubyClass, RMXPx.Viewport, RMXPx.Sprite>(RMXPx.SpriteOps.Create)
             );
             DefineGlobalClass("Tone", typeof(RMXPx.Tone), 0x00000008, classRef0, LoadTone_Instance, LoadTone_Class, null, IronRuby.Builtins.RubyModule.EmptyArray, 

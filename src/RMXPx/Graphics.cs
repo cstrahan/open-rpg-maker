@@ -60,46 +60,61 @@ namespace RMXPx
         [RubyMethod("update", RubyMethodAttributes.PublicSingleton)]
         public static void Update(RubyClass self)
         {
+#if SILVERLIGHT
             _timer.Wait();
 
-            var surface = GetSurfaceBmp(self);
-            var renderables = GetRenderables(self);
-
-            var sortedRenderable = renderables
-                .Where(r => !r.Disposed && r.Visible)
-                .OrderBy(r => r.Z)
-                .ToList();
-
-            foreach (var renderable in sortedRenderable)
+            Sync.Action(() =>
             {
-                var sprite = renderable as Sprite;
-                if (sprite != null && sprite.Visible)
-                {
-                    surface.Blt(sprite.X - sprite.OX, sprite.Y - sprite.OY, sprite.Bitmap, sprite.SrcRect,
-                                sprite.Opacity, sprite.BlendType);
-                }
-                else
-                {
-                    var viewport = renderable as Viewport;
-                    foreach (var sprite1 in viewport.Sprites)
-                    {
-                        surface.Blt(
-                            viewport.Rect.X - viewport.OX + sprite1.X - sprite1.OX,
-                            viewport.Rect.Y - viewport.OY + sprite1.Y - sprite1.OX,
-                            sprite1.Bitmap,
-                            sprite1.ActualSrcRect,
-                            sprite1.Opacity,
-                            sprite1.BlendType);
-                    }
-                    // TODO: draw the viewport's color, tone and flash
-                }
-            }
 
-#if SILVERLIGHT
-            Sync.Action(surface.Invalidate);
+                var backBuffer = new Bitmap(640, 480, Font.GetDefaultCopy(self.Context));
+                var renderables = GetRenderables(self);
+
+                var sortedRenderable = renderables
+                    .Where(r => !r.Disposed && r.Visible)
+                    .OrderBy(r => r.Z)
+                    .ToList();
+
+                foreach (var renderable in sortedRenderable)
+                {
+                    if (renderable is Sprite)
+                    {
+                        var sprite = (Sprite)renderable;
+                        backBuffer.Blt(sprite.X - sprite.OX, sprite.Y - sprite.OY, sprite.Bitmap, sprite.SrcRect,
+                                    sprite.Opacity, sprite.BlendType);
+                    }
+                    else if (renderable is Viewport)
+                    {
+                        var viewport = renderable as Viewport;
+
+                        var sprites = viewport.Sprites.Where(s => s.Visible).OrderBy(s => s.Z);
+                        foreach (var sprite in sprites)
+                        {
+                            backBuffer.Blt(
+                                viewport.Rect.X - viewport.OX + sprite.X - sprite.OX,
+                                viewport.Rect.Y - viewport.OY + sprite.Y - sprite.OX,
+                                sprite.Bitmap,
+                                sprite.ActualSrcRect,
+                                sprite.Opacity,
+                                sprite.BlendType);
+                        }
+
+                        // TODO: draw the viewport's tone and flash
+                        if (viewport.Color.Alpha != 0)
+                        {
+                            var colorBitmap = new Bitmap(viewport.Rect.Width, viewport.Rect.Height, Font.GetDefaultCopy(self.Context));
+                            colorBitmap.FillRect(colorBitmap.GetRect(), viewport.Color);
+                            backBuffer.Blt(viewport.Rect.X, viewport.Rect.Y, colorBitmap, colorBitmap.GetRect(), 255);
+                        }
+                    }
+                }
+
+                var surface = GetSurfaceBmp(self);
+                surface.Blt(0, 0, backBuffer, new Rect(0, 0, 640, 480), null);
+                surface.Invalidate();
+
+                SetFrameCount(self, GetFrameCount(self) + 1);
+            });
 #endif
-            //surface.Invalidate();
-            SetFrameCount(self, GetFrameCount(self) + 1);
         }
 
         [RubyMethod("surface_bmp", RubyMethodAttributes.PublicSingleton)]

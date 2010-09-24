@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Scripting.Runtime;
+using System.Linq;
 
 namespace RMXPx
 {
@@ -186,6 +187,12 @@ namespace RMXPx
                             });
         }
 
+        // TODO: Remove this shitty shitty shitty method...
+        public WriteableBitmap GetBmp()
+        {
+            return _writableBitmap;
+        }
+
         public void FillRect(Rect rect, Color color)
         {
             FillRect(rect.X, rect.Y, rect.Width, rect.Height, color);
@@ -311,6 +318,8 @@ namespace RMXPx
 
                                 WriteableBitmap bitmap = new WriteableBitmap((int) width, (int) height);
                                 bitmap.Render(textBlock, transform);
+                                // Need this following line, otherwise the next blit won't blit anything
+                                bitmap.Invalidate();
 
                                 _writableBitmap.Blit(
                                     new System.Windows.Rect(x, y, width, height),

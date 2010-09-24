@@ -110,13 +110,13 @@ namespace RMXPx
         [RubyMethod("draw_text", RubyMethodAttributes.PublicInstance)]
         public static void DrawText(Bitmap/*!*/ self, int x, int y, int width, int height, string str, [Optional] int? align)
         {
-            self.DrawText(x, y, width, height, str, align ?? 1);
+            self.DrawText(x, y, width, height, str, align ?? 0);
         }
 
         [RubyMethod("draw_text", RubyMethodAttributes.PublicInstance)]
         public static void DrawText(Bitmap/*!*/ self, Rect rect, string str, [Optional]int? align)
         {
-            self.DrawText(rect, str, align ?? 1);
+            self.DrawText(rect, str, align ?? 0);
         }
 
         [RubyMethod("text_size", RubyMethodAttributes.PublicInstance)]

@@ -182,6 +182,19 @@ namespace RMXPx
 
 begin
   require 'rpg'
+
+  # My tests
+  sprite = Sprite.new(Viewport.new(10, 10, 50, 50))
+  sprite.viewport.z = 100000
+  sprite.viewport.color = Color.new(255,255,255,120)
+  sprite.viewport.rect.x = 0
+  sprite.bitmap = Bitmap.new(640,480)
+  sprite.bitmap.draw_text(0, 0, 640, 30, 
+  ""a b c d e f g h j k l m n o p q r s t"",
+  0)
+  sprite.z = 100000
+
+
   require 'zlib'
   database = File.open('Data/Scripts.rxdata', 'rb') { |f| Marshal.load f }
   

@@ -93,114 +93,118 @@ end
 #   SG::Cursor_Rect
 #==============================================================================
 
-class Cursor_Rect < ::Sprite
-  #--------------------------------------------------------------------------
-  # ? instances settings
-  #--------------------------------------------------------------------------
-  attr_reader   :height, :width, :skin, :margin
-  #--------------------------------------------------------------------------
-  # ? initialize
-  #--------------------------------------------------------------------------
-  def initialize(viewport)
-    super(viewport)
-	@width = 0
-    @height = 0
-    @skin = nil
-    @margin = 0
-    @rect = {}
-    @rect['cursor_up'] = Rect.new(129, 64, 30, 1)
-    @rect['cursor_down'] = Rect.new(129, 95, 30, 1)
-    @rect['cursor_left'] = Rect.new(128, 65, 1, 30)
-    @rect['cursor_right'] = Rect.new(159, 65, 1, 30)
-    @rect['upleft'] = Rect.new(128, 64, 1, 1)
-    @rect['upright'] = Rect.new(159, 64, 1, 1)
-    @rect['downleft'] = Rect.new(128, 95, 1, 1)
-    @rect['downright'] = Rect.new(159, 95, 1, 1)
-    @rect['bg'] = Rect.new(129, 65, 30, 30)
-  end
-  #--------------------------------------------------------------------------
-  # ? margin=
-  #--------------------------------------------------------------------------
-  def margin=(margin)
-    @margin = margin
-    set(x, y, width, height)
-  end
-  #--------------------------------------------------------------------------
-  # ? skin=
-  #--------------------------------------------------------------------------
-  def skin=(skin)
-    @skin = skin
-    draw_rect
-  end
-  #--------------------------------------------------------------------------
-  # ? width=
-  #--------------------------------------------------------------------------
-  def width=(width)
-    return if @width == width
-    @width = width
-    if @width == 0 and self.bitmap != nil
-      self.bitmap.dispose
-      self.bitmap = nil
-    end
-    draw_rect
-  end
-  #--------------------------------------------------------------------------
-  # ? height=
-  #--------------------------------------------------------------------------
-  def height=(height)
-    return if @height == height
-    @height = height
-    if @height == 0 and self.bitmap != nil
-      self.bitmap.dispose
-      self.bitmap = nil
-    end
-    draw_rect
-  end
-  #--------------------------------------------------------------------------
-  # ? set
-  #--------------------------------------------------------------------------
-  def set(x, y, width, height)
-    self.x = x + @margin
-    self.y = y + @margin
-    if @width != width or @height != height
-      @width = width
-      @height = height
-      if width > 0 and height > 0
+class Cursor_Rect
+
+  def self.new(viewport)
+    sprite = ::Sprite.new(viewport)
+
+	sprite.instance_eval do
+	  class << self
+	    attr_reader   :height, :width, :skin, :margin
+      end
+
+	  @width = 0
+      @height = 0
+      @skin = nil
+      @margin = 0
+      @rect = {}
+      @rect['cursor_up'] = Rect.new(129, 64, 30, 1)
+      @rect['cursor_down'] = Rect.new(129, 95, 30, 1)
+      @rect['cursor_left'] = Rect.new(128, 65, 1, 30)
+      @rect['cursor_right'] = Rect.new(159, 65, 1, 30)
+      @rect['upleft'] = Rect.new(128, 64, 1, 1)
+      @rect['upright'] = Rect.new(159, 64, 1, 1)
+      @rect['downleft'] = Rect.new(128, 95, 1, 1)
+      @rect['downright'] = Rect.new(159, 95, 1, 1)
+      @rect['bg'] = Rect.new(129, 65, 30, 30)  
+
+      #--------------------------------------------------------------------------
+      # ? margin=
+      #--------------------------------------------------------------------------
+      def margin=(margin)
+        @margin = margin
+        set(x, y, width, height)
+      end
+      #--------------------------------------------------------------------------
+      # ? skin=
+      #--------------------------------------------------------------------------
+      def skin=(skin)
+        @skin = skin
         draw_rect
       end
+      #--------------------------------------------------------------------------
+      # ? width=
+      #--------------------------------------------------------------------------
+      def width=(width)
+        return if @width == width
+        @width = width
+        if @width == 0 and self.bitmap != nil
+          self.bitmap.dispose
+          self.bitmap = nil
+        end
+        draw_rect
+      end
+      #--------------------------------------------------------------------------
+      # ? height=
+      #--------------------------------------------------------------------------
+      def height=(height)
+        return if @height == height
+        @height = height
+        if @height == 0 and self.bitmap != nil
+          self.bitmap.dispose
+          self.bitmap = nil
+        end
+        draw_rect
+      end
+      #--------------------------------------------------------------------------
+      # ? set
+      #--------------------------------------------------------------------------
+      def set(x, y, width, height)
+        self.x = x + @margin
+        self.y = y + @margin
+        if @width != width or @height != height
+          @width = width
+          @height = height
+          if width > 0 and height > 0
+            draw_rect
+          end
+        end
+      end
+      #--------------------------------------------------------------------------
+      # ? empty
+      #--------------------------------------------------------------------------
+      def empty
+        self.x = 0
+        self.y = 0
+        self.width = 0
+        self.height = 0
+      end
+      #--------------------------------------------------------------------------
+      # ? draw_rect
+      #--------------------------------------------------------------------------
+      def draw_rect
+        return if @skin == nil
+        if @width > 0 and @height > 0
+          self.bitmap = Bitmap.new(@width, @height)
+          rect = Rect.new(1, 1, @width - 2, @height - 2)
+          self.bitmap.stretch_blt(rect, @skin, @rect['bg'])
+          self.bitmap.blt(0, 0, @skin, @rect['upleft'])
+          self.bitmap.blt(@width-1, 0, @skin, @rect['upright'])
+          self.bitmap.blt(0, @height-1, @skin, @rect['downright'])
+          self.bitmap.blt(@width-1, @height-1, @skin, @rect['downleft'])
+          rect = Rect.new(1, 0, @width - 2, 1)
+          self.bitmap.stretch_blt(rect, @skin, @rect['cursor_up'])
+          rect = Rect.new(0, 1, 1, @height - 2)
+          self.bitmap.stretch_blt(rect, @skin, @rect['cursor_left'])
+          rect = Rect.new(1, @height-1, @width - 2, 1)
+          self.bitmap.stretch_blt(rect, @skin, @rect['cursor_down'])
+          rect = Rect.new(@width - 1, 1, 1, @height - 2)
+          self.bitmap.stretch_blt(rect, @skin, @rect['cursor_right'])
+        end
+      end
     end
-  end
-  #--------------------------------------------------------------------------
-  # ? empty
-  #--------------------------------------------------------------------------
-  def empty
-    self.x = 0
-    self.y = 0
-    self.width = 0
-    self.height = 0
-  end
-  #--------------------------------------------------------------------------
-  # ? draw_rect
-  #--------------------------------------------------------------------------
-  def draw_rect
-    return if @skin == nil
-    if @width > 0 and @height > 0
-      self.bitmap = Bitmap.new(@width, @height)
-      rect = Rect.new(1, 1, @width - 2, @height - 2)
-      self.bitmap.stretch_blt(rect, @skin, @rect['bg'])
-      self.bitmap.blt(0, 0, @skin, @rect['upleft'])
-      self.bitmap.blt(@width-1, 0, @skin, @rect['upright'])
-      self.bitmap.blt(0, @height-1, @skin, @rect['downright'])
-      self.bitmap.blt(@width-1, @height-1, @skin, @rect['downleft'])
-      rect = Rect.new(1, 0, @width - 2, 1)
-      self.bitmap.stretch_blt(rect, @skin, @rect['cursor_up'])
-      rect = Rect.new(0, 1, 1, @height - 2)
-      self.bitmap.stretch_blt(rect, @skin, @rect['cursor_left'])
-      rect = Rect.new(1, @height-1, @width - 2, 1)
-      self.bitmap.stretch_blt(rect, @skin, @rect['cursor_down'])
-      rect = Rect.new(@width - 1, 1, 1, @height - 2)
-      self.bitmap.stretch_blt(rect, @skin, @rect['cursor_right'])
-    end
+
+	sprite
   end
 end
 

@@ -242,7 +242,13 @@ namespace RMXPx
         }
 
         [RubyConstructor]
-        public static Sprite Create(RubyClass self, [Optional]Viewport viewport)
+        public static Sprite Create(RubyClass self)
+        {
+            return Create(self, null);
+        }
+
+        [RubyConstructor]
+        public static Sprite Create(RubyClass self, Viewport viewport)
         {
             var sprite = new Sprite(viewport);
             if (viewport == null)

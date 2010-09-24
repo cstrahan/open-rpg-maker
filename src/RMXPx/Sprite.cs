@@ -49,30 +49,32 @@ namespace RMXPx
         public int BlendType { get; set; }
         public Color/*!*/ Color { get; set; }
         public Tone/*!*/ Tone { get; set; }
-        private Viewport _viewport;
+        private readonly Viewport _viewport;
         public Viewport Viewport
         {
             get { return _viewport; }
-            private set
-            {
-                _viewport = value;
-                if (_viewport != null)
-                {
-                    _viewport.AddSprite(this);
-                }
-            }
         }
 
+        
 
         public bool Disposed { get; private set; }
 
-        public Sprite() : this(null)
-        {
-        }
+        //public Sprite() : this(null)
+        //{
+        //}
 
         public Sprite(Viewport viewport) 
         {
-            Viewport = viewport;
+            _viewport = viewport;
+            if (_viewport != null)
+            {
+                _viewport.AddSprite(this);
+                if (_viewport.Z == 102)
+                {
+                    
+                }
+            }
+
             SrcRect = new Rect(0, 0, 0, 0);
             Visible = true;
             X = 0;
@@ -89,7 +91,6 @@ namespace RMXPx
             BlendType = 0;
             Color = new Color(0, 0, 0, 0);
             Tone = new Tone(0, 0, 0, 0);
-            Viewport = viewport;
         }
 
         public void Dispose()
