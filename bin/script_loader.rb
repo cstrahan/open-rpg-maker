@@ -20,5 +20,5 @@ else
   scripts.each do |script|
     require File.expand_path(script)
   end
-  
+
 end

@@ -3,7 +3,7 @@ module RPG
   class MoveCommand
     # Move command code.
     attr_accessor :code
-    
+
     # Array containing the Move command arguments.
     # The contents vary for each command.
     attr_accessor :parameters

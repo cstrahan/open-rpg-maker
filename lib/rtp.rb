@@ -8,21 +8,21 @@ private
     located_path = path.dup
     located_path += ".*" if !has_extension?(located_path)
     located_path.gsub!('\\', '/') # make Dir.glob happy
-    
+
     Dir.glob(located_path)[0]     # naively pick first match
   end
-  
+
   def self.has_extension?(path)
     File.basename(path) != File.basename(path, '.*')
   end
-  
+
   def self.full_path?(path)
     path == File.expand_path(path)
   end
-  
+
   def self.get_standard_path
     common_path = System::Environment.get_folder_path(System::Environment::SpecialFolder.common_program_files)
-  
+
     if (!common_path.nil? && !common_path.empty?)
       return File.join(common_path, 'Enterbrain/RGSS/Standard/')
     else
@@ -44,7 +44,7 @@ public
     # See if the file is relative to the game folder (Dir.pwd)
     located_path = nil
     located_path = locate_first(path)
-    
+
     # If we didn't find any file, lets try looking in the the standard RTP
     if located_path.nil? and !full_path?(path)
       if !STANDARD_PATH.nil?
@@ -52,7 +52,7 @@ public
         located_path = locate_first(rtp_relative_path)
       end
     end
-    
+
     return located_path
   end
 

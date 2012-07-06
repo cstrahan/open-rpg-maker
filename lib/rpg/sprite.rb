@@ -20,7 +20,7 @@ module RPG
       dispose_loop_animation
       super
     end
-    
+
     # Makes sprite white for a weak flash effect. Used when a battler is moving.
     def whiten
       self.blend_type = 0
@@ -31,7 +31,7 @@ module RPG
       @_escape_duration = 0
       @_collapse_duration = 0
     end
-    
+
     # Smoothly transitions a sprite from transparent to opaque.
     # Used when a character is revived and when an enemy appears.
     def appear
@@ -43,7 +43,7 @@ module RPG
       @_escape_duration = 0
       @_collapse_duration = 0
     end
-    
+
     # Smoothly transitions a sprite from opaque to transparent.
     # Used when an enemy runs away.
     def escape
@@ -55,7 +55,7 @@ module RPG
       @_appear_duration = 0
       @_collapse_duration = 0
     end
-    
+
     # Blends red with a sprite's color information and smoothly
     # transitions it to transparent.
     # Used when HP reaches 0 and the character collapses.
@@ -68,7 +68,7 @@ module RPG
       @_appear_duration = 0
       @_escape_duration = 0
     end
-    
+
     # Displays the amount of damage or the word "Miss!"in a pop-up
     # in front of the sprite.
     #
@@ -121,7 +121,7 @@ module RPG
       @_damage_sprite.z = 3000
       @_damage_duration = 40
     end
-    
+
     # Plays the animation specified in animation ({RPG::Animation}) on
     # the indicated sprite.
     #
@@ -171,7 +171,7 @@ module RPG
       end
       update_animation
     end
-    
+
     # Plays the animation specified in animation ({RPG::Animation}) in a loop
     # on the indicated sprite.
     #
@@ -204,8 +204,8 @@ module RPG
       end
       update_loop_animation
     end
-    
-    
+
+
     def dispose_damage
       if @_damage_sprite != nil
         @_damage_sprite.bitmap.dispose
@@ -214,7 +214,7 @@ module RPG
         @_damage_duration = 0
       end
     end
-    
+
     def dispose_animation
       if @_animation_sprites != nil
         sprite = @_animation_sprites[0]
@@ -231,7 +231,7 @@ module RPG
         @_animation = nil
       end
     end
-    
+
     def dispose_loop_animation
       if @_loop_animation_sprites != nil
         sprite = @_loop_animation_sprites[0]
@@ -248,7 +248,7 @@ module RPG
         @_loop_animation = nil
       end
     end
-    
+
     # Turns the blink effect on. Makes a sprite glow white,
     # then repeats the effect at set intervals.
     # Used on an actor while entering commands.
@@ -258,7 +258,7 @@ module RPG
         @_blink_count = 0
       end
     end
-    
+
     # Turns the blink effect off.
     def blink_off
       if @_blink
@@ -266,15 +266,15 @@ module RPG
         self.color.set(0, 0, 0, 0)
       end
     end
-    
+
     # Returns TRUE when the blink effect is on.
     def blink?
       @_blink
     end
-    
+
     # Returns TRUE when whiten, appear, escape, collapse, damage,
     # or animation is on.
-    # 
+    #
     # Neither loop_animation nor blink have any effect,
     def effect?
       @_whiten_duration > 0 or
@@ -284,7 +284,7 @@ module RPG
       @_damage_duration > 0 or
       @_animation_duration > 0
     end
-    
+
     # Refreshes each effect. As a rule, this method is called once per frame.
     def update
       super
@@ -341,7 +341,7 @@ module RPG
       end
       @@_animations.clear
     end
-    
+
     def update_animation
       if @_animation_duration > 0
         frame_index = @_animation.frame_max - @_animation_duration
@@ -357,7 +357,7 @@ module RPG
         dispose_animation
       end
     end
-    
+
     def update_loop_animation
       frame_index = @_loop_animation_index
       cell_data = @_loop_animation.frames[frame_index].cell_data
@@ -369,7 +369,7 @@ module RPG
         end
       end
     end
-    
+
     def animation_set_sprites(sprites, cell_data, position)
       for i in 0..15
         sprite = sprites[i]
@@ -407,7 +407,7 @@ module RPG
         sprite.blend_type = cell_data[i, 7]
       end
     end
-    
+
     def animation_process_timing(timing, hit)
       if (timing.condition == 0) or
          (timing.condition == 1 and hit == true) or
@@ -428,7 +428,7 @@ module RPG
         end
       end
     end
-    
+
     def x=(x)
       sx = x - self.x
       if sx != 0
@@ -445,7 +445,7 @@ module RPG
       end
       super
     end
-    
+
     def y=(y)
       sy = y - self.y
       if sy != 0
@@ -462,6 +462,6 @@ module RPG
       end
       super
     end
-    
+
   end
 end

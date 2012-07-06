@@ -8,30 +8,30 @@ class Viewport
   # The {Rect} defining the viewport.
   # @returns [Rect]
   attr_accessor :rect
-  
+
   # The viewport's visibility. If TRUE, the viewport is visible.
   attr_accessor :visible
-  
+
   # The viewport's Z-coordinate. The larger this value, the closer to the
   # player the viewport will be displayed. If multiple objects share the same
   # Z-coordinate, the more recently created object will be
   # displayed closest to the player.
   attr_accessor :z
-  
+
   # The X-coordinate of the viewport's starting point.
   # Change this value to shake the screen, etc.
   attr_accessor :ox
-  
+
   # The Y-coordinate of the viewport's starting point.
   # Change this value to shake the screen, etc.
   attr_accessor :oy
-  
+
   # The {Color} to be blended with the viewport. Alpha values are used in the blending ratio.
   #
   # Handled separately from the color blended into a flash effect.
   # @returns [Color]
   attr_accessor :color
-  
+
   # The viewport's color {Tone}.
   # @returns [Tone]
   attr_accessor :tone
@@ -46,7 +46,7 @@ class Viewport
     else
       raise "invalid arguments"
     end
-    
+
     self.visible = true
     self.ox = self.oy = self.z = 0
     self.color = Color.new(0, 0, 0, 0)

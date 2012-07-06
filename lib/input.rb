@@ -60,7 +60,7 @@ module Input
   # Checks the status of the directional buttons, translates the data
   # into a specialized 4-direction input format, and returns the number
   # pad equivalent (2, 4, 6, 8).
-  # 
+  #
   # If no directional buttons are being pressed (or the equivalent), returns 0.
   def self.dir4()
     @dir4_current

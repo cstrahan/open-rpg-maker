@@ -29,55 +29,55 @@ module RPG
       @armor_id = 0
       @treasure_prob = 100
     end
-    
+
     # The enemy ID.
     attr_accessor :id
-    
+
     # The enemy name.
     attr_accessor :name
-    
+
     # The enemy's battler graphic file name.
     attr_accessor :battler_name
-    
+
     # The adjustment value for the battler graphic's hue (0..360).
     attr_accessor :battler_hue
-    
+
     # The enemy's max HP.
     attr_accessor :maxhp
-    
+
     # The enemy's max SP.
     attr_accessor :maxsp
-    
+
     # The enemy's strength.
     attr_accessor :str
-    
+
     # The enemy's dexterity.
     attr_accessor :dex
-    
+
     # The enemy's agility.
     attr_accessor :agi
-    
+
     # The enemy's intelligence.
     attr_accessor :int
-    
+
     # The enemy's attack power.
     attr_accessor :atk
-    
+
     # The enemy's physical defense rating.
     attr_accessor :pdef
-    
+
     # The enemy's magic defense rating.
     attr_accessor :mdef
-    
+
     # The enemy's evasion rating.
     attr_accessor :eva
-    
+
     # The battle animation ID.
     attr_accessor :animation1_id
-    
+
     # The target animation ID.
     attr_accessor :animation2_id
-    
+
     # Level of elemental effectiveness.
     # 1-dimensional {Table} using element IDs as subscripts, with 6 levels:
     # 0::    A
@@ -88,7 +88,7 @@ module RPG
     # 5::    F
     # @return [Integer]
     attr_accessor :element_ranks
-    
+
     # Level of status effectiveness.
     # 1-dimensional {Table} using status IDs as subscripts, with 6 levels:
     # 0::    A
@@ -99,29 +99,29 @@ module RPG
     # 5::    F
     # @return [Integer]
     attr_accessor :state_ranks
-    
+
     # The enemy's actions. An {RPG::Enemy::Action} array.
     # @return [Array<RPG::Enemy::Action>]
     attr_accessor :actions
-    
+
     # The enemy's experience.
     attr_accessor :exp
-    
+
     # The enemy's gold.
     attr_accessor :gold
-    
+
     # The ID of the item used as treasure.
     # @return [Integer]
     attr_accessor :item_id
-    
+
     # The ID of the weapon used as treasure.
     # @return [Integer]
     attr_accessor :weapon_id
-    
+
     # The ID of the armor used as treasure.
     # @return [Integer]
     attr_accessor :armor_id
-    
+
     # The probability of treasure being left behind.
     attr_accessor :treasure_prob
 
@@ -137,13 +137,13 @@ module RPG
         @condition_switch_id = 0
         @rating = 5
       end
-      
+
       # Type of action:
       # 0::    basic
       # 1::    skill
       # @return [Integer]
       attr_accessor :kind
-      
+
       # When set to a [Basic] action, defines it further:
       # 0::    attack
       # 1::    defend
@@ -151,33 +151,33 @@ module RPG
       # 3::    do nothing
       # @return [Integer]
       attr_accessor :basic
-      
+
       # When set to a [Skill], the ID of that skill.
       # @return [Integer]
       attr_accessor :skill_id
-      
+
       # a value specified in the [Turn] condition.
       # To be input in the form a + bx.
       #
       # When the turn is not specified as a condition, a = 0 and b = 1.
       attr_accessor :condition_turn_a
-      
+
       # b value specified in the [Turn] condition.
       # To be input in the form a + bx.
       #
       # When the turn is not specified as a condition, a = 0 and b = 1.
       attr_accessor :condition_turn_b
-      
+
       # Percentage specified in the [HP] condition.
       #
       # When HP is not specified as a condition, this value is set to 100.
       attr_accessor :condition_hp
-      
+
       # Standard level specified in the [Level] condition.
       #
       # When the level is not specified as a condition, this value is set to 1.
       attr_accessor :condition_level
-      
+
       # Switch ID specified in the [Switch] condition.
       #
       # When the switch ID is not specified as a condition,
@@ -185,7 +185,7 @@ module RPG
       # this value is 0.
       # @return [Integer]
       attr_accessor :condition_switch_id
-      
+
       # The action's rating (1..10).
       attr_accessor :rating
     end

@@ -2,7 +2,7 @@
 # ** Game_System
 #------------------------------------------------------------------------------
 #  This class handles data surrounding the system. Backround music, etc.
-#  is managed here as well. Refer to "$game_system" for the instance of 
+#  is managed here as well. Refer to "$game_system" for the instance of
 #  this class.
 #==============================================================================
 

@@ -7,9 +7,9 @@ Bitmap = System::Drawing::Bitmap
 # The bitmap class. Bitmaps are expressions of so-called graphics.
 # Sprites ({Sprite}) and other objects must be used to display bitmaps on the screen.
 class Bitmap
-  
+
   # System::Drawing::Bitmap is sealed, so let's monkey patch this mofo
-  # TODO: Condsider this - instead of aliasing ::System::Drawing::Bitmap as ::Object::Bitmap, 
+  # TODO: Condsider this - instead of aliasing ::System::Drawing::Bitmap as ::Object::Bitmap,
   #       Create a new Bitmap class, and redefine Bitmap.new.
   class << self
     define_method :new do |*args|
@@ -26,7 +26,7 @@ class Bitmap
       end
     end
   end
-  
+
   # Gets the font used to draw a string with the {Bitmap#draw_text} method.
   # @return [Font] the font used to draw a string with the {Bitmap#draw_text} method.
   attr_accessor :font
@@ -43,12 +43,12 @@ class Bitmap
     Rect.new(0, 0, width, height)
   end
 
-  # A new instance of {Bitmap}. 
-  # @overload initialize(filename) 
+  # A new instance of {Bitmap}.
+  # @overload initialize(filename)
   #   Loads the graphic file specified in filename and creates a bitmap object.
   #   Also automatically searches files included in RGSS-RTP and encrypted archives. File extensions may be omitted.
   #   @return [Bitmap] a bitmap of the graphic file specified in filename.
-  # @overload initialize(width, height) 
+  # @overload initialize(width, height)
   #   Creates a bitmap object with the specified size.
   #   @return [Bitmap] a bitmap oject with the specified size.
   #def initialize(*args)
@@ -71,8 +71,8 @@ class Bitmap
   #
   # @param [Number] x
   # @param [Number] y
-  # @param [Bitmap] src_bitmap the bitmap to transfer. 
-  # @param [Rect] src_rect the box section of the src_rect to transfer. 
+  # @param [Bitmap] src_bitmap the bitmap to transfer.
+  # @param [Rect] src_rect the box section of the src_rect to transfer.
   # @param [Number] opacity the opacity to use for the src_bitmap. Valid values: (0..255).
   def blt(x, y, src_bitmap, src_rect, opacity = 255)
     src_rectangle    = rect_to_rectangle(src_rect)
@@ -89,9 +89,9 @@ class Bitmap
   # opacity can be set from 0 to 255.
   #
   # @param [Rect] dest_rect
-  # @param [Bitmap] src_bitmap 
-  # @param [Rect] src_rect 
-  # @param [Number] opacity 
+  # @param [Bitmap] src_bitmap
+  # @param [Rect] src_rect
+  # @param [Number] opacity
   def stretch_blt(dest_rect, src_bitmap, src_rect, opacity = 255)
     src_rectangle    = rect_to_rectangle(src_rect)
     dest_rectangle   = rect_to_rectangle(dest_rect)
@@ -140,14 +140,14 @@ class Bitmap
   def hue_change(hue)
   end
 
-  # Draws a string str in the bitmap box (x, y, width, height) or rect (Rect).  
+  # Draws a string str in the bitmap box (x, y, width, height) or rect (Rect).
   #
-  # If the text length exceeds the box's width, the text width will automatically be reduced by up to 60 percent.  
+  # If the text length exceeds the box's width, the text width will automatically be reduced by up to 60 percent.
   #
-  # Horizontal text is left-aligned by default; set align to 1 to center the text and to 2 to right-align it. Vertical text is always centered.  
+  # Horizontal text is left-aligned by default; set align to 1 to center the text and to 2 to right-align it. Vertical text is always centered.
   #
   # As this process is time-consuming, redrawing the text with every frame is not recommended.
-  # 
+  #
   # @overload draw_text(x, y, width, height, str[, align])
   # @overload draw_text(rect, str[, align])
   def draw_text(*args)
@@ -171,12 +171,12 @@ class Bitmap
     font = System::Drawing::Font.new(self.font.name, self.font.size, style, System::Drawing::GraphicsUnit.point)
     System::Drawing::Graphics.from_image(self).draw_string(str, font, brush, rect.x, rect.y)
   end
-  
+
   # @return [Rect] the box used when drawing a string str with the draw_text method.
   #   Does not include the angled portions of italicized text.
   def text_size(str)
   end
-  
+
   def dup
     clr_member(:Clone).call
   end

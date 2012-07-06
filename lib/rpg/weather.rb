@@ -12,14 +12,14 @@ module RPG
     # 2::    storm
     # 3::    snow
     attr_reader :type
-    
+
     # Amount of weather to be shown at once (0..40).
     attr_reader :max
-    
+
     # The X-coordinate of the effect's starting point.
     # Correlates with the tilemap starting point and scrolls.
     attr_reader :ox
-    
+
     # The Y-coordinate of the effect's starting point.
     # Correlates with the tilemap starting point and scrolls.
     attr_reader :oy
@@ -55,7 +55,7 @@ module RPG
         @sprites.push(sprite)
       end
     end
-    
+
     # Frees a weather effect.
     def dispose
       for sprite in @sprites
@@ -65,7 +65,7 @@ module RPG
       @storm_bitmap.dispose
       @snow_bitmap.dispose
     end
-    
+
     # Weather type:
     # 0::    none
     # 1::    rain
@@ -92,7 +92,7 @@ module RPG
         end
       end
     end
-    
+
     # The X-coordinate of the effect's starting point.
     # Correlates with the tilemap starting point and scrolls.
     def ox=(ox)
@@ -102,7 +102,7 @@ module RPG
         sprite.ox = @ox
       end
     end
-    
+
     # The Y-coordinate of the effect's starting point.
     # Correlates with the tilemap starting point and scrolls.
     def oy=(oy)
@@ -112,7 +112,7 @@ module RPG
         sprite.oy = @oy
       end
     end
-    
+
     # Amount of weather to be shown at once (0..40).
     def max=(max)
       return if @max == max;
@@ -124,7 +124,7 @@ module RPG
         end
       end
     end
-    
+
     # Advances the weather effect.
     # As a rule, this method is called once per frame.
     def update

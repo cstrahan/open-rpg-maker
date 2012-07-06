@@ -1,7 +1,7 @@
 #==============================================================================
 # ** Game_Party
 #------------------------------------------------------------------------------
-#  This class handles the party. It includes information on amount of gold 
+#  This class handles the party. It includes information on amount of gold
 #  and items. Refer to "$game_party" for the instance of this class.
 #==============================================================================
 

@@ -40,44 +40,44 @@ module RPG
       @battler_hue = 0
       @edit_map_id = 1
     end
-    
+
     # Magic number used for update checks.
     # Updates changed values every time data is saved in RPGXP.
     attr_accessor :magic_number
-    
+
     # The initial party. An array of actor IDs.
     attr_accessor :party_members
-    
+
     # Element list. Text array using element IDs as subscripts, with the
     # element in the 0 position being nil.
     attr_accessor :elements
-    
+
     # Switch list. Text array using switch IDs as subscripts, with the element
     # in the 0 position being nil.
     attr_accessor :switches
-    
+
     # Variable list. Text array using variable IDs as subscripts, with the
     # element in the 0 position being nil.
     attr_accessor :variables
-    
+
     # The window skin (or "windowskin") graphic file name.
     attr_accessor :windowskin_name
-    
+
     # The title graphic file name.
     attr_accessor :title_name
-    
+
     # The "Game Over" graphic file name.
     attr_accessor :gameover_name
-    
+
     # The file name of the transition graphic, displayed when entering battle.
     attr_accessor :battle_transition
-    
+
     # The title BGM ({RPG::AudioFile}).
     attr_accessor :title_bgm
-    
+
     # The battle BGM ({RPG::AudioFile}).
     attr_accessor :battle_bgm
-    
+
     # The battle end ME ({RPG::AudioFile}).
     attr_accessor :battle_end_me
 
@@ -122,36 +122,36 @@ module RPG
 
     # Terms ({RPG::System::Words}).
     attr_accessor :words
-    
+
     # Party settings for battle tests. An {RPG::System::TestBattler} array.
     # @return [Array<RPG::System::TestBattler>]
     attr_accessor :test_battlers
-    
+
     # The troop ID for battle tests.
     attr_accessor :test_troop_id
-    
+
     # The map ID of the player's initial position.
     attr_accessor :start_map_id
-    
+
     # The map X-coordinate of the player's initial position.
     attr_accessor :start_x
-    
+
     # The map Y-coordinate of the player's initial position.
     attr_accessor :start_y
-    
+
     # The battle background graphic file name, for battle tests and internal use.
     attr_accessor :battleback_name
-    
+
     # The battler graphic file name, for internal use.
     attr_accessor :battler_name
-    
+
     # The adjustment value for the battler graphic's hue (0..360),
     # for internal use.
     attr_accessor :battler_hue
-    
+
     # The ID of the map currently being edited, for internal use.
     attr_accessor :edit_map_id
-    
+
     # Data class for terminology.
     class Words
       def initialize
@@ -176,68 +176,68 @@ module RPG
         @item = ""
         @equip = ""
       end
-      
+
       # The term "G" (the unit of currency).
       attr_accessor :gold
-      
+
       # The term "HP" (hit points).
       attr_accessor :hp
-      
+
       # The term "SP" (skill points).
       attr_accessor :sp
-      
+
       # The term "Strength".
       attr_accessor :str
-      
+
       # The term "Dexterity".
       attr_accessor :dex
-      
+
       # The term "Agility".
       attr_accessor :agi
-      
+
       # The term "Intelligence".
       attr_accessor :int
-      
+
       # The term "Attack Power".
       attr_accessor :atk
-      
+
       # The term "Physical Defense".
       attr_accessor :pdef
-      
+
       # The term "Magic Defense".
       attr_accessor :mdef
-      
+
       # The term "Weapon".
       attr_accessor :weapon
-      
+
       # The term "Shield".
       attr_accessor :armor1
-      
+
       # The term "Helmet".
       attr_accessor :armor2
-      
+
       # The term "Body armor".
       attr_accessor :armor3
-      
+
       # The term "Accessory".
       attr_accessor :armor4
-      
+
       # The term "Attack".
       attr_accessor :attack
-      
+
       # The term "Skill".
       attr_accessor :skill
-      
+
       # The term "Defense".
       attr_accessor :guard
-      
+
       # The term "Item".
       attr_accessor :item
-      
+
       # The term "Equip".
       attr_accessor :equip
     end
-    
+
     # Data class for the battlers used in battle tests.
     class TestBattler
       def initialize
@@ -249,25 +249,25 @@ module RPG
         @armor3_id = 0
         @armor4_id = 0
       end
-      
+
       # The actor ID.
       attr_accessor :actor_id
-      
+
       # The actor's level.
       attr_accessor :level
-      
+
       # The actor's weapon ID.
       attr_accessor :weapon_id
-      
+
       # The actor's shield ID.
       attr_accessor :armor1_id
-      
+
       # The actor's helmet ID.
       attr_accessor :armor2_id
-      
+
       # The actor's body armor ID.
       attr_accessor :armor3_id
-      
+
       # The actor's accessory ID.
       attr_accessor :armor4_id
     end

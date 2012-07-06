@@ -1,7 +1,7 @@
 #==============================================================================
 # ** Game_BattleAction
 #------------------------------------------------------------------------------
-#  This class handles actions in battle. It's used within the Game_Battler 
+#  This class handles actions in battle. It's used within the Game_Battler
 #  class.
 #==============================================================================
 

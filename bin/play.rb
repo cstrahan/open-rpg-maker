@@ -7,13 +7,13 @@ require 'singleton'
 class MainForm < System::Windows::Forms::Form
   include Singleton
   include System::Windows::Forms
-  
+
   def initialize
-    
+
     self.auto_size_mode = AutoSizeMode.grow_and_shrink
     self.auto_size = true
     self.text = "Open RPG Maker"
-    
+
     @canvas = PictureBox.new
     @canvas.width = 640
     @canvas.height = 480
@@ -22,13 +22,13 @@ class MainForm < System::Windows::Forms::Form
     @canvas.back_color = System::Drawing::Color.black
     # @canvas.background_image = scene
     self.controls.add(@canvas)
-    
+
     self.load do |sender, e|
       Object.instance_eval do
       end
     end
 
-    
+
     key_map = { Keys.space  => Input::C,      Keys.enter    => Input::C,
                 Keys.escape => Input::B,      Keys.num_pad0 => Input::B,
                 Keys.shift  => Input::A,      Keys.z        => Input::A,
@@ -59,7 +59,7 @@ class MainForm < System::Windows::Forms::Form
     end
 
   end
-  
+
   def surface=(bmp)
     @canvas.background_image = bmp
   end

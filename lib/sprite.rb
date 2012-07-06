@@ -8,7 +8,7 @@ require 'tone'
 class Sprite < Drawable
   # Refers to the {Bitmap} used for the sprite's starting point.
   attr_reader :bitmap
-  
+
   def bitmap=(bmp)
     @bitmap = bmp
     self.src_rect = Rect.new(0, 0, bmp.width, bmp.height)
@@ -16,7 +16,7 @@ class Sprite < Drawable
 
   # The box (Rect) taken from a bitmap.
   attr_accessor :src_rect
-  
+
   # The sprite's visibility. If TRUE, the sprite is visible.
   attr_accessor :visible
 
@@ -58,7 +58,7 @@ class Sprite < Drawable
   # A simple way to convey a sense of a character's feet being obscured by
   # foliage and the like.
   attr_accessor :bush_depth
- 
+
   # The sprite's opacity (0-255). Values out of range are automatically corrected.
   attr_accessor :opacity
 
@@ -114,7 +114,7 @@ class Sprite < Drawable
   # duration specifies the number of frames the flash will last.
   #
   # If color is set to nil, the sprite will disappear while flashing.
-  def flash(color, duration) 
+  def flash(color, duration)
   end
 
   # Refreshes the sprite flash. As a rule, this method is called once per frame.

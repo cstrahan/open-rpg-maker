@@ -6,16 +6,16 @@ module Graphics
     # The larger the value, the more CPU power is required. Normally set at 40.
     # When not in [Smooth Mode], the refresh rate is halved,
     # and graphics are drawn in every other frame.
-    # 
+    #
     # Changing this property is not recommended; however, it can be set
     # anywhere from 10 to 120. Values out of range are automatically corrected.
     attr_accessor :frame_rate
-    
+
     # The screen's refresh rate count. Set this property to 0 at game start
     # and the game play time (in seconds) can be calculated
     # by dividing this value by the frame_rate property value.
     attr_accessor :frame_count
-    
+
     # The game window. Must provide a _#surface=(bmp)_ method.
     attr_accessor :window
   end
@@ -52,15 +52,15 @@ module Graphics
 
   # Carries out a transition from the screen fixed in Graphics.freeze to the
   # current screen.
-  # 
+  #
   # duration is the number of frames the transition will last.
   # When omitted, this value is set to 8.
-  # 
+  #
   # filename specifies the transition graphic file name. When not specified,
   # a standard fade will be used. Also automatically searches files included in
   # RGSS-RTP and encrypted archives. File extensions may be omitted.
-  # 
-  # vague sets the ambiguity of the borderline between the graphic's starting 
+  #
+  # vague sets the ambiguity of the borderline between the graphic's starting
   # and ending points. The larger the value, the greater the ambiguity.
   # When omitted, this value is set to 40.
   def self.transition(duration = 8, filename = nil, vague = 40)
@@ -72,7 +72,7 @@ module Graphics
   def self.frame_reset()
     warn "need to implement Graphics.frame_reset"
   end
-  
+
 private
 
   def self.stable_sort(items)

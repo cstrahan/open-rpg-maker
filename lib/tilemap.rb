@@ -5,7 +5,7 @@
 #==============================================================================
 
 #==============================================================================
-# 
+#
 #   Yet another Tilemap Script (for any map size /w autotiles)
 #   by Me™ / Derk-Jan Karrenbeld (me@solarsoft.nl)
 #   version 1.0 released on 08 nov 08
@@ -23,33 +23,33 @@ class Tilemap
   attr_reader :visible
   attr_reader :ox, :oy
   attr_writer :autotiles
-  
+
   #--------------------------------------------------------------------------
   # * Constant Configuration
   #--------------------------------------------------------------------------
-  
+
   # Window Rect - the visible Area of the Map (default: 640 x 480)
   # Bitmap Rect - the active drawing Area of the Map (window tiles + 2 tiles)
   # BitmapWindow offset - the invisible tile count on one side
   WindowRect = Rect.new(0,0,640,480)
   BitmapRect = Rect.new(0,0,640 + 64, 480 + 64) # Recommended
   BitmapWindowOffset = (BitmapRect.height-WindowRect.height)/2/32
-  
+
   # Length in frames of one frame showing from autotile
   AutotileLength = 10
-  
+
   # KillOutScreenSprite - Kills priority and autotile sprites out of screen
   # EnableFlashingData - If activated, enables updating flashing data
   KillOutScreenSprite   = true
   EnableFlashingData    = false
-  
+
   # SingleFlashingSprite - Uses one Flashing sprite, instead of many
   # SinglePrioritySprite - Uses one Priority sprite, instead of many
   # SingleAutotileSprite - Uses one Autotile sprite, instead of many
   SingleFlashingSprite  = false
   SinglePrioritySprite  = false
   SingleAutotileSprite  = false
-  
+
   # This is the Autotile animation graphical index array. It contains numbers
   # that point to the graphic part of an animating autotile.
   Autotiles = [
@@ -419,7 +419,7 @@ class Tilemap
     # Set New Region
     @region.x, @region.y = left_x, top_y
     # Set New Sprite Positions (pray for non disposed sprites: checking = cpu cost)
-    (@priority_sprites + @autotile_sprites).each { |sprite| sprite[0].x = (sprite[1] - left_x) * 32 ; 
+    (@priority_sprites + @autotile_sprites).each { |sprite| sprite[0].x = (sprite[1] - left_x) * 32 ;
       sprite[0].ox = @ox % 32; sprite[0].y = (sprite[2] - top_y) * 32; sprite[0].oy = @oy % 32;
       unless (priority = @priority_ids[tile_id(sprite[1], sprite[2], sprite[3])]).nil? then sprite[0].z = @viewport.z + sprite[0].y + priority * 32 + 32 end}
     # Return on old data
@@ -474,7 +474,7 @@ class Tilemap
     @priority_sprites.clear; @autotile_sprites.clear
     # Determine x and y coords for tile top left
     left_x = @ox / 32
-    top_y = @oy / 32 
+    top_y = @oy / 32
     # Set Sprite ox/oy
     @sprite.ox = BitmapWindowOffset * 32
     @sprite.oy = BitmapWindowOffset * 32
@@ -639,7 +639,7 @@ class Tilemap
     current_frame = (Graphics.frame_count/AutotileLength) % frames
     # Now Get Frame Bitmap
     src_bitmap = @auto_tiles[tile_id][current_frame]
-    return src_bitmap    
+    return src_bitmap
   end
   #--------------------------------------------------------------------------
   # * Set x origin value
@@ -686,7 +686,7 @@ class Tilemap
   def update_autotiles
     # Determine x and y coords for tile top left
     left_x = @ox / 32
-    top_y = @oy / 32 
+    top_y = @oy / 32
     # Iterate trough sprites
     for sprite in @autotile_sprites
       # Get Data from Array
@@ -699,5 +699,5 @@ class Tilemap
       # so it will be 'fixed' there. No need to call something twice, right?
     end
   end
-  
+
 end

@@ -48,7 +48,7 @@ class Scene_Map
     # Loop
     loop do
       # Update map, interpreter, and player order
-      # (this update order is important for when conditions are fulfilled 
+      # (this update order is important for when conditions are fulfilled
       # to run any event, and the player isn't provided the opportunity to
       # move in an instant)
       $game_map.update

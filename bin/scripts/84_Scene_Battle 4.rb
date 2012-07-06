@@ -265,13 +265,13 @@ class Scene_Battle
             @target_battlers.push(enemy)
           end
         end
-      when 5  # single ally (HP 0) 
+      when 5  # single ally (HP 0)
         index = @active_battler.current_action.target_index
         enemy = $game_troop.enemies[index]
         if enemy != nil and enemy.hp0?
           @target_battlers.push(enemy)
         end
-      when 6  # all allies (HP 0) 
+      when 6  # all allies (HP 0)
         for enemy in $game_troop.enemies
           if enemy != nil and enemy.hp0?
             @target_battlers.push(enemy)
@@ -303,13 +303,13 @@ class Scene_Battle
             @target_battlers.push(actor)
           end
         end
-      when 5  # single ally (HP 0) 
+      when 5  # single ally (HP 0)
         index = @active_battler.current_action.target_index
         actor = $game_party.actors[index]
         if actor != nil and actor.hp0?
           @target_battlers.push(actor)
         end
-      when 6  # all allies (HP 0) 
+      when 6  # all allies (HP 0)
         for actor in $game_party.actors
           if actor != nil and actor.hp0?
             @target_battlers.push(actor)

@@ -1,7 +1,7 @@
 #==============================================================================
 # ** Arrow_Enemy
 #------------------------------------------------------------------------------
-#  This arrow cursor is used to choose enemies. This class inherits from the 
+#  This arrow cursor is used to choose enemies. This class inherits from the
 #  Arrow_Base class.
 #==============================================================================
 

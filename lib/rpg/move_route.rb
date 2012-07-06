@@ -8,13 +8,13 @@ module RPG
       @skippable = false
       @list = [RPG::MoveCommand.new]
     end
-    
+
     # Truth value of the [Repeat Action] option.
     attr_accessor :repeat
-    
+
     # Truth value of the [Ignore if Can't Move] option.
     attr_accessor :skippable
-    
+
     # Program contents. An {RPG::MoveCommand} array.
     # @return [Array<RPG::MoveCommand>]
     attr_accessor :list
